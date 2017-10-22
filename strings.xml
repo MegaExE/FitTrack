@@ -6,6 +6,7 @@
     <string name="Option">Option</string>
     <string name="About">About</string>
 
+
     <string name="StepsCounter">Steps Counter</string>
     <string name="Goals">Goals</string>
     <string name="Setgoals">Set Goals</string>
@@ -13,11 +14,15 @@
     <string name="NewGoal">Add a new Goal</string>
     <string name="NotePad">NotePad</string>
     <string name="Weight">Weight</string>
+    <string name="currentWeight">Current Weight</string>
+    <string name="latestWeight">Latest Weight</string>
+    <string name="progressButton">Progress</string>
 
 
     <string name="CurrentWeight">Current Weight</string>
     <string name="FinalWeight">Final Weight</string>
     <string name="Weightlog">Weight Log</string>
+
 
     <string name="UVIndex">UV Index</string>
     <string name="Thermalarray">Thermal Array</string>
