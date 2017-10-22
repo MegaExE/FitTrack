@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Created by Owner on 10/2/2017.
+ *  Team Name: ARJ
  */
 
 public class Goals extends AppCompatActivity {
@@ -28,9 +28,9 @@ public class Goals extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.goals);
 
-
+        //Creates the ArrayList for Goals
         ListView listView = (ListView)findViewById(R.id.listv);
-        String[] items={"test","test"};
+        String[] items={};
         arrayList=new ArrayList<>(Arrays.asList(items));
         adapter=new ArrayAdapter<String>(this,R.layout.list_item,R.id.txtitem,arrayList);
         listView.setAdapter(adapter);
@@ -39,9 +39,9 @@ public class Goals extends AppCompatActivity {
 
 
 
-
-            final Button setgoals2 = (Button) findViewById(R.id.setgoal);
-            setgoals2.setOnClickListener(new View.OnClickListener(){
+            //Set the user's Goals
+            final Button setgoals = (Button) findViewById(R.id.setgoal);
+            setgoals.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     TextView tv1;
                     EditText input;
@@ -50,6 +50,7 @@ public class Goals extends AppCompatActivity {
                    tv1 = (TextView ) findViewById(R.id.textView2);
                    tv1.setText(input.getText().toString());
 
+                    //Display the users Goals in ListView
                     arrayList.add(input.getText().toString());
                     adapter.notifyDataSetChanged();
                 }
