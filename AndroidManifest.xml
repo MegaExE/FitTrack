@@ -31,6 +31,14 @@
         android:parentActivityName=".Main">
 
     </activity>
+
+        <activity
+            android:name=".Goals"
+            android:label="@string/NotePad"
+            android:windowSoftInputMode="adjustPan"
+            android:parentActivityName=".Main">
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+        </activity>
 </application>
 
 </manifest>
