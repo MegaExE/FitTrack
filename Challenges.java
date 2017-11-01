@@ -87,6 +87,6 @@ public class Challenges extends AppCompatActivity {
         }
         Toast.makeText(this, selItems, Toast.LENGTH_LONG).show();
     }
-
+ 
 
 }
