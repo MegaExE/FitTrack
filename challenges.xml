@@ -19,7 +19,7 @@
         android:id="@+id/checkable_list"
         android:layout_width="fill_parent"
         android:layout_height="480dp"
-        >
+        > 
 
     </ListView>
 </LinearLayout>
