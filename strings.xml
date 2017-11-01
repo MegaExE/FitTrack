@@ -1,20 +1,21 @@
 <resources>
     <string name="step_counter">android.hardware.sensor.stepcounter</string>
     <string name="step_detector">android.hardware.sensor.stepdetector</string>
-    <string name="currentWeight">Current weight here</string>
-    <string name="latestWeight">Latest weight here:</string>
-    <string name="progressButton">Check Progress</string>
-    <string name="saveButton">Save</string>
+    <!-- strings for Splash -->
+    <string name="teamname">Team ARJ Presents</string>
 
-    <string name="app_name">FitTrackTest</string>
+    <!-- strings for Toolbar -->
+    <string name="Discussion">Discussions</string>
+    <string name="News">News</string>
     <string name="Setting">Setting</string>
     <string name="Help">Help</string>
-    <string name="More">More</string>
-    <string name="Option">Option</string>
     <string name="About">About</string>
-    <string name="Discussion">Discussion</string>
 
-    <string name="StepsCounter">Steps Counter</string>
+    <!-- strings for Main -->
+    <string name="app_name">FitTrack</string>
+    <string name="Option">Option</string>
+    <string name="StepsCounter">Steps</string>
+    <string name="Distance">Distance</string>
     <string name="Goals">Goals</string>
     <string name="Setgoals">Set Goals</string>
     <string name="goalslog">Goals Log</string>
@@ -22,10 +23,14 @@
     <string name="NotePad">NotePad</string>
     <string name="Weight">Weight</string>
 
-
+    <!-- strings for weight -->
     <string name="CurrentWeight">Current Weight</string>
     <string name="FinalWeight">Final Weight</string>
     <string name="Weightlog">Weight Log</string>
+    <string name="currentWeight">Current weight here</string>
+    <string name="latestWeight">Latest weight here:</string>
+    <string name="progressButton">Check Progress</string>
+    <string name="saveButton">Save</string>
 
     <string name="UVIndex">UV Index</string>
     <string name="Thermalarray">Thermal Array</string>
