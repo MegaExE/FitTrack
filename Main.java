@@ -204,12 +204,13 @@ public class Main extends AppCompatActivity implements SensorEventListener {
             //distance.setText(String.valueOf(distanceTraval(sensorEvent.values[0])));
             //distance.setText(String.valueOf(distanceTraval(step)));
             //step++;
-        } else if (sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
-            steps.setText(String.valueOf(Math.round(sensorEvent.values[0])));
-            //distance.setText(String.valueOf(distanceTraval(values[0])));
-            //distance.setText(String.valueOf(distanceTraval(step)));
         }
 
+        /*else if (sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
+            //steps.setText(String.valueOf(Math.round(sensorEvent.values[0])));
+
+        }
+*/
     }
 
     //Registers the Sensor and get sensor data as fast as possible
