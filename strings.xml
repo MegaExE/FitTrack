@@ -22,20 +22,28 @@
     <string name="NewGoal">Add a new Goal</string>
     <string name="NotePad">NotePad</string>
     <string name="Weight">Weight</string>
+    <string name="Calories">Calories Burnt</string>
+    <string name="cal">cals</string>
 
     <!-- strings for weight -->
-    <string name="CurrentWeight">Current Weight</string>
     <string name="FinalWeight">Final Weight</string>
     <string name="Weightlog">Weight Log</string>
-    <string name="currentWeight">Current weight here</string>
+    <string name="currentWeight">Enter Weight</string>
     <string name="latestWeight">Latest weight here:</string>
     <string name="progressButton">Check Progress</string>
     <string name="saveButton">Save</string>
-
+    <string name="bmi">BMI Calculator (Body Mass Index)</string>
+    <!-- Sensors -->
     <string name="UVIndex">UV Index</string>
     <string name="Thermalarray">Thermal Array</string>
     <string name="Info">Info</string>
 
+
+    <!-- strings for Challenges -->
+    <string name="ChallengeList">List of Challenge</string>
     <string name="Challenge">Challenge</string>
+
+    <!-- strings for Notes -->
+    <string name="Saves">Saved Notes</string>
 
 </resources>
