@@ -7,19 +7,11 @@
     >
 
 
-
-    <Button
-        android:id="@+id/btshow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="showSelectedItems"
-        android:text="Show selected items" />
-
     <ListView
         android:id="@+id/checkable_list"
         android:layout_width="fill_parent"
-        android:layout_height="480dp"
-        > 
+        android:layout_height="643dp"
+        >
 
     </ListView>
 </LinearLayout>
