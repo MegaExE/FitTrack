@@ -17,7 +17,8 @@ import android.widget.Toast;
 import java.util.jar.Attributes;
 
 /**
- * Created by John on 2017-10-03.
+ *  Team Name: ARJ
+ *  Adrian Caprini N01115682, Raphael Najera N01104031, Johnson Liang N01129137
  */
 
 public class WeightLog extends AppCompatActivity {
@@ -46,7 +47,7 @@ public class WeightLog extends AppCompatActivity {
         }
         else
         {
-            long id = helper.insertData(weight);
+            long id = helper.insertData_Weight(weight);
             if(id<=0)
             {
                 Message.message(getApplicationContext(),"Insert Unsuccessful");
@@ -60,7 +61,7 @@ public class WeightLog extends AppCompatActivity {
     }
 
     public void viewdata(View view) {
-        String data = helper.getData();
+        String data = helper.getData_Weight();
         Message.message(this,data);
     }
 
@@ -75,12 +76,30 @@ public class WeightLog extends AppCompatActivity {
         float weight = Float.parseFloat(KG);
         float height = Float.parseFloat(CM) / 100;
         float bmi = calcualte(weight,height);
-
-        Result.setText(String.valueOf(bmi));
+        String bmiresult = bmiResult(bmi);
+        Result.setText(String.valueOf(String.format("%.1f", bmi) + ". \t" + bmiresult));
     }
 
     private float calcualte(float weight, float height){
         return (float) (weight/(height * height));
+    }
+    //depending on bmi levels it will output to the user to display their body status
+    private String bmiResult(float bmi){
+        if (bmi < 16){
+            return "You are severely underweight!";
+        }
+        else if(bmi < 18.5){
+            return "You are underweight.";
+        }
+        else if(bmi < 25){
+            return "Your weight is normal.";
+        }
+        else if(bmi < 30){
+            return "You are overweight!";
+        }
+        else{
+            return "You are obese!";
+        }
     }
 /*
     public void update( View view)
@@ -107,6 +126,8 @@ public class WeightLog extends AppCompatActivity {
         }
     }
     */
+
+    //used to delete a weight if user entered wrong weight
     public void delete(View view)
     {
         String uweight = DeleteWeight.getText().toString();
@@ -115,7 +136,7 @@ public class WeightLog extends AppCompatActivity {
             Message.message(getApplicationContext(),"enter existing weight to delete");
         }
         else{
-            int i= helper.delete(uweight);
+            int i= helper.delete_weight(uweight);
             if(i <= 0)
             {
                 Message.message(getApplicationContext(),"cannot delete non-existing weight");
