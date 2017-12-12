@@ -9,12 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main">
+        <activity
+            android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Main"
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".WeightLog"
@@ -35,6 +40,14 @@
         <uses-feature
             android:name="@string/step_detector"
             android:required="false"/>
+
+        <activity
+            android:name=".MenuTab"
+            android:label="@string/title_activity_menu_tab"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <uses-permission
+            android:name="android.permission.BODY_SENSORS" />
 
     </application>
 
