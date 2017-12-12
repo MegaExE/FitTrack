@@ -34,26 +34,20 @@
 
         </activity>
 
-        <activity
-        android:name=".Goal"
-        android:label="@string/Goals"
-        android:parentActivityName=".Main"
-        android:windowSoftInputMode="adjustPan">
-        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-        </activity>
-
-        <activity android:name=".Challenges"
-            android:label="@string/Challenge"
-            android:parentActivityName=".Goal">
-
-        </activity>
-
         <uses-feature
             android:name="@string/step_counter"
             android:required="false"/>
         <uses-feature
             android:name="@string/step_detector"
             android:required="false"/>
+
+        <activity
+            android:name=".MenuTab"
+            android:label="@string/title_activity_menu_tab"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <uses-permission
+            android:name="android.permission.BODY_SENSORS" />
 
     </application>
 

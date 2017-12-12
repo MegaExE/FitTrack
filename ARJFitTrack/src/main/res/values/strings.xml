@@ -20,6 +20,8 @@
     <string name="Setgoals">Set Goals</string>
     <string name="goalslog">Goals Log</string>
     <string name="NewGoal">Add a new Goal</string>
+    <string name="Deletegoals">Delete Goals</string>
+    <string name="listgoal">List of Goals:</string>
     <string name="NotePad">NotePad</string>
     <string name="Weight">Weight</string>
     <string name="Calories">Calories Burnt</string>
@@ -45,5 +47,7 @@
 
     <!-- strings for Notes -->
     <string name="Saves">Saved Notes</string>
-
+    <string name="title_activity_menu_tab">FitTrack</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
