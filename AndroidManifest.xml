@@ -4,41 +4,42 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/fittrackicon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/fittrackicon"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main">
+        <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Main"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".WeightLog"
+            android:label="@string/Weight"
+            android:parentActivityName=".Main"></activity>
+        <activity
+            android:name=".Notepad"
+            android:label="@string/NotePad"
+            android:parentActivityName=".Main"></activity>
 
 
-    <activity
-        android:name=".Weight"
-        android:label="@string/Weight"
-        android:parentActivityName=".Main">
-
-    </activity>
-
-    <activity
-        android:name=".Notepad"
-        android:label="@string/NotePad"
-        android:parentActivityName=".Main">
-
-    </activity>
+        <uses-feature
+            android:name="@string/step_counter"
+            android:required="false" />
+        <uses-feature
+            android:name="@string/step_detector"
+            android:required="false" />
 
         <activity
-            android:name=".Goals"
-            android:label="@string/Goals"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".Main">
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-        </activity>
-</application>
+            android:name=".MenuTab"
+            android:label="@string/title_activity_menu_tab"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
 
 </manifest>
