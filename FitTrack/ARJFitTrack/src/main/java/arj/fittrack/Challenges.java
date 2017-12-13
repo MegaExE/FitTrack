@@ -31,6 +31,8 @@ public class Challenges extends Fragment {
     //Declare Database
     myDbAdapter helper;
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
