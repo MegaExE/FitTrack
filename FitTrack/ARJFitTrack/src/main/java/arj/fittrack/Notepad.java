@@ -27,9 +27,10 @@ import java.io.OutputStreamWriter;
 
 public class Notepad  extends AppCompatActivity {
 
-
+    //Declare values
     EditText EditText1;
     final Context context = this;
+
 
 
 
