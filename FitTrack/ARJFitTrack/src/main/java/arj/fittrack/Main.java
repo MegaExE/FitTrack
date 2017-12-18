@@ -1,34 +1,24 @@
 package arj.fittrack;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.icu.text.DecimalFormat;
-import android.icu.text.NumberFormat;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import static arj.fittrack.R.id.count;
-import static arj.fittrack.R.id.travelled;
 /**
  *  Team Name: ARJ
  *  Adrian Caprini N01115682, Raphael Najera N01104031, Johnson Liang N01129137
@@ -113,6 +103,37 @@ public class Main extends AppCompatActivity implements SensorEventListener {
         editor.putString("calories",calories.getText().toString());
         editor.commit();
 */
+    }
+
+    //handle Android Back Key on Main Screen, and confirm user wants to exit the app.
+    @Override
+    public void onBackPressed(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        // set title
+        alertDialogBuilder.setTitle("Exit");
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Are you sure you want to exit FitTrack?")
+                .setCancelable(false)
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public  void onClick(DialogInterface dialog,int id){
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                })
+                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, just close
+                        // exit the app
+                        finish();
+                    }
+                });
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show it
+        alertDialog.show();
     }
 
     @Override
