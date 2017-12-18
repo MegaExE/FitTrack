@@ -265,18 +265,19 @@ public class Main extends AppCompatActivity implements SensorEventListener {
         //78 cm is the average step length for men while 70cm is for woman. I used 0.74 because it is a median.
         final float CENTIMETER = 0.74f;
         final float CONVERSION = 1000f;
+        final int MTOKM = 1000;
         TextView METER = (TextView) findViewById(R.id.meter);
         float distanceinM = 0;
         //float distanceinM = (float) (CENTIMETER * steps);
         //float distanceinKM = (float) (CENTIMETER * steps) / CONVERSION;
-        if(distanceinM <= 1000)
+        if(distanceinM <= MTOKM)
         {
             METER.setText("meters");
             METER.setTextSize(20);
             distanceinM = (float) (CENTIMETER * steps);
             //return distanceinM;
         }
-        if (distanceinM >= 1000)
+        if (distanceinM >= MTOKM)
         {
             METER.setText("kilometers");
             METER.setTextSize(15);
