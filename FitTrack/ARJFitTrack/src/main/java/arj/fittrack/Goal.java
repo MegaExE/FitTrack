@@ -96,6 +96,7 @@ public class Goal extends Fragment {
         //User's input for adding the Goals
         input = (EditText) view.findViewById(R.id.editText);
 
+        //Create an ArrayList object to store the goals that has been checkmark
         selectedItems = new ArrayList<String>();
 
 
