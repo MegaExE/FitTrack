@@ -92,6 +92,7 @@ public class Main extends AppCompatActivity implements SensorEventListener {
             }
         });
 
+
         //Implementing Step Counter
         steps = (TextView) findViewById(count);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -103,16 +104,18 @@ public class Main extends AppCompatActivity implements SensorEventListener {
 
         //Implementing Calories Calculator
         calories = (TextView) findViewById(R.id.cals);
-
 /*
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences pref = getSharedPreferences("StoredData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
 
-        editor.putString("steps", steps.getText().toString());
-        editor.putString("distance", distance.getText().toString());
-        editor.putString("calories",calories.getText().toString());
+        String displaySteps = steps.getText().toString();
+        editor.putString("steps", displaySteps);
         editor.commit();
 */
+        SharedPreferences preferences = getSharedPreferences("StoredData", Context.MODE_PRIVATE);
+        String getSteps = preferences.getString("steps","");
+        steps.setText(getSteps);
+
     }
 
     @Override
@@ -229,9 +232,34 @@ public class Main extends AppCompatActivity implements SensorEventListener {
 
         //Used to display the step counter but also the distance and calories.
         if (sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+/*
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            float savedSteps = sharedPreferences.getFloat("steps", sensorEvent.values[0]);
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putFloat("steps", savedSteps);
+            // int saveSteps = 0;
+            // int saveDistance = 0;
+            // int saveCalories = 0;
+            //editor.putString("saveSteps", steps.getText().toString());
+            //editor.putString("saveDistance", distance.getText().toString());
+            //editor.putString("saveCalories", calories.getText().toString());
+            //steps.setText(String.valueOf(Math.round(sensorEvent.values[0])));
+            editor.commit();
+  */
+
+
             steps.setText(String.valueOf(Math.round(sensorEvent.values[0])));
             distance.setText(String.valueOf(String.format("%.2f",distanceTraval(sensorEvent.values[0]))));
             calories.setText(String.valueOf(String.format("%.1f",caloriesBurnt(sensorEvent.values[0]))));
+
+            SharedPreferences pref = getSharedPreferences("StoredData", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+
+            String displaySteps = steps.getText().toString();
+            String displayDistance = distance.getText().toString();
+            editor.putString("steps", displaySteps);
+            editor.commit();
             //distance.setText(String.valueOf(distanceTraval(sensorEvent.values[0])));
             //distance.setText(String.valueOf(distanceTraval(step)));
             //step++;
