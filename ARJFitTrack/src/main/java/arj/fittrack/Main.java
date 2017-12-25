@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import static arj.fittrack.R.id.count;
+import static arj.fittrack.R.id.disableHome;
 import static arj.fittrack.R.id.travelled;
 /**
  *  Team Name: ARJ
@@ -51,7 +52,7 @@ public class Main extends AppCompatActivity implements SensorEventListener {
     //TextView for calories burnt
     TextView calories;
 
-
+    String displaySteps;
 
 
     @Override
@@ -112,9 +113,30 @@ public class Main extends AppCompatActivity implements SensorEventListener {
         editor.putString("steps", displaySteps);
         editor.commit();
 */
-        SharedPreferences preferences = getSharedPreferences("StoredData", Context.MODE_PRIVATE);
-        String getSteps = preferences.getString("steps","");
+        SharedPreferences preferences = getSharedPreferences("Test3", Context.MODE_PRIVATE);
+        String getSteps = preferences.getString("steps", steps.getText().toString());
+        String getDistance = preferences.getString("distance", distance.getText().toString());
+        String getCalories = preferences.getString("calories", calories.getText().toString());
         steps.setText(getSteps);
+        distance.setText(getDistance);
+        calories.setText(getCalories);
+    }
+
+    protected void onPause(){
+        super.onPause();
+
+        //int nsteps = Integer.parseInt(String.valueOf(displaySteps));
+
+        SharedPreferences pref = getSharedPreferences("Test3", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        String displaySteps = steps.getText().toString();
+        String displayDistance = distance.getText().toString();
+        String displayCalories = calories.getText().toString();
+        editor.putString("steps", displaySteps).commit();
+        editor.putString("distance", displayDistance).commit();
+        editor.putString("calories", displayCalories).commit();
+        editor.apply();
 
     }
 
@@ -124,6 +146,7 @@ public class Main extends AppCompatActivity implements SensorEventListener {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -232,34 +255,23 @@ public class Main extends AppCompatActivity implements SensorEventListener {
 
         //Used to display the step counter but also the distance and calories.
         if (sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-/*
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-            float savedSteps = sharedPreferences.getFloat("steps", sensorEvent.values[0]);
-
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putFloat("steps", savedSteps);
-            // int saveSteps = 0;
-            // int saveDistance = 0;
-            // int saveCalories = 0;
-            //editor.putString("saveSteps", steps.getText().toString());
-            //editor.putString("saveDistance", distance.getText().toString());
-            //editor.putString("saveCalories", calories.getText().toString());
-            //steps.setText(String.valueOf(Math.round(sensorEvent.values[0])));
-            editor.commit();
-  */
-
 
             steps.setText(String.valueOf(Math.round(sensorEvent.values[0])));
             distance.setText(String.valueOf(String.format("%.2f",distanceTraval(sensorEvent.values[0]))));
             calories.setText(String.valueOf(String.format("%.1f",caloriesBurnt(sensorEvent.values[0]))));
-
-            SharedPreferences pref = getSharedPreferences("StoredData", Context.MODE_PRIVATE);
+/*
+            //Context.MODE_PRIVATE | Context.MODE_APPEND
+            SharedPreferences pref = getSharedPreferences("Test2", 0);
             SharedPreferences.Editor editor = pref.edit();
-
-            String displaySteps = steps.getText().toString();
+            editor.clear();
+            displaySteps = steps.getText().toString();
             String displayDistance = distance.getText().toString();
+            String displayCalories = calories.getText().toString();
             editor.putString("steps", displaySteps);
+            editor.putString("distance", displayDistance);
+            editor.putString("calories", displayCalories);
             editor.commit();
+    */
             //distance.setText(String.valueOf(distanceTraval(sensorEvent.values[0])));
             //distance.setText(String.valueOf(distanceTraval(step)));
             //step++;
@@ -280,11 +292,6 @@ public class Main extends AppCompatActivity implements SensorEventListener {
         sensorManager.registerListener(this, stepDetector, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //distance.setText(String.valueOf(distanceTraval(step)));
-    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
