@@ -1,8 +1,11 @@
 package arj.fittrack;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,8 @@ public class Goal extends Fragment {
     private static final String PREFS_NAME = "prefs";
     private static final String PREF_DARK_THEME = "dark_theme";
 
+
+
     //Declare ArrayList, ArrayAdapter and EditText
     static ArrayList<String> arrayList;
     static ArrayAdapter<String> adapter;
@@ -38,14 +43,14 @@ public class Goal extends Fragment {
     myDbAdapter helper;
 
     //Declared the Context for Dialog
-    final Goal context = this;
+    //final Goal context = this;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.goalactivity, container, false);
-
+        final Context context = getContext();
         /*SharedPreferences preferences = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
@@ -61,10 +66,10 @@ public class Goal extends Fragment {
         // ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Initialize the DatabaseHelper
-        helper = new myDbAdapter((getActivity().getApplicationContext()));
+        helper = new myDbAdapter((getActivity()));
 
         //Creates the ListView
-        ListView listView = (ListView) view.findViewById(R.id.listv);
+        final ListView listView = (ListView) view.findViewById(R.id.listv);
 
         //Stores the user's goal
         String[] goals = {};
@@ -104,11 +109,48 @@ public class Goal extends Fragment {
         //set OnItemClickListener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = ((TextView) view).getText().toString();
-                if(selectedItems.contains(selectedItem))
+                final String selectedItem = ((TextView) view).getText().toString();
+              /*  if(selectedItems.contains(selectedItem))
                     selectedItems.remove(selectedItem); //remove deselected item from the list of selected items
                 else
-                    selectedItems.add(selectedItem); //add selected item to the list of selected items
+                    selectedItems.add(selectedItem); //add selected item to the list of selected items*/
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                // set title
+                alertDialogBuilder.setTitle("Delete");
+                // set dialog message
+                alertDialogBuilder
+                        .setMessage("Are you sure?")
+                        .setCancelable(false)
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public  void onClick(DialogInterface dialog,int id){
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        })
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked
+                                // delete the goal
+
+                                long i = helper.delete_goals(selectedItem);
+                                if (i <= 0) {
+                                    Message.message(getActivity().getApplicationContext(), "Unable to delete goal");
+
+                                } else {
+                                    Message.message(getActivity().getApplicationContext(), "Goal deleted");
+
+                                }
+
+
+
+                            }
+                        });
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                // show it
+                alertDialog.show();
 
             }
         });
@@ -156,33 +198,57 @@ public class Goal extends Fragment {
         });
 
 
-        //This button will delete the user's Goals
+       /* //This button will delete the user's Goals
         final Button deletegoal = (Button) view.findViewById(R.id.deletegoal);
         deletegoal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                int count = 0;
 
-                for(String goals:selectedItems) {
+                String data = helper.getData_Goals();
+                String[] test = data.split("\n");
+                for (String savegoals : test) {
+                    count++;
+                }
 
-                    // helper.delete_goals(goals); //remove the user's goals from the database
-                    //Message.message(getActivity().getApplicationContext(),goals);
-                    int i= helper.delete_goals(goals);
-                    if(i <= 0)
-                    {
-                        Message.message(getActivity().getApplicationContext(),"Unable to delete goal");
+                String[] array = new String[count];
 
-                    }
-                    else
-                    {
+                int k = 0;
+                //String goals = null;
+                for (String goals : selectedItems) {
+                    array[k] = goals;
+                    k++;
+                }
+
+
+                // helper.delete_goals(goals); //remove the user's goals from the database
+                //Message.message(getActivity().getApplicationContext(),goals);
+
+                Message.message(getActivity().getApplicationContext(), array[0]);
+              //  Message.message(getActivity().getApplicationContext(), array[1]);
+
+                //Displays the user's goals
+
+
+                    long i = helper.delete_goals(array[0]);
+                    if (i <=0) {
+                        Message.message(getActivity().getApplicationContext(), "Unable to delete goal");
+
+                    } else {
                         Message.message(getActivity().getApplicationContext(), "Goal deleted");
 
                     }
                     // arrayList.remove(goals); //remove the user's goals
-                    adapter.notifyDataSetChanged();
+                    /// adapter.notifyDataSetChanged();
+
+
                 }
 
-            }
-        });
+
+
+
+
+        });*/
 
 
         return view;
