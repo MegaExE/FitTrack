@@ -72,7 +72,7 @@ public class Challenges extends Fragment {
 
 
         //This section will be storing the Challenges and Task in a String
-        String[] items={" "};
+        String[] items = new String[0];
 
         //Create an ArrayList object to store the challenges and tasks
         arrayList = new ArrayList<>(Arrays.asList(items));
