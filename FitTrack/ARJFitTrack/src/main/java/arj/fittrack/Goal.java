@@ -66,13 +66,13 @@ public class Goal extends Fragment {
         // ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Initialize the DatabaseHelper
-        helper = new myDbAdapter((getActivity()));
+        helper = new myDbAdapter(getActivity().getApplicationContext());
 
         //Creates the ListView
-        final ListView listView = (ListView) view.findViewById(R.id.listv);
+         ListView listView = (ListView) view.findViewById(R.id.listv);
 
         //Stores the user's goal
-        String[] goals = {};
+        String[] goals = {""};
 
 
 
@@ -80,7 +80,7 @@ public class Goal extends Fragment {
         arrayList = new ArrayList<>(Arrays.asList(goals));
         //adapter=new ArrayAdapter<String>(this,R.layout.list_item,R.id.txtitem,android.R.layout.simple_list_item_multiple_choice,arrayList);
         //Supply data items to Checkbox Listview
-        adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
+        adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
 
         //set multiple selection mode
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
