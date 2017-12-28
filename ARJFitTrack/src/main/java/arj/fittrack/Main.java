@@ -60,40 +60,6 @@ public class Main extends AppCompatActivity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //ImageButton for Weight Activity (dumbbell)
-        final ImageButton weight = (ImageButton) findViewById(R.id.weight);
-        weight.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                Intent intent = new Intent(Main.this, WeightLog.class);
-                startActivity(intent);
-            }
-        });
-
-        //ImageButton for Notepad Activity (notepad)
-        final ImageButton notepad = (ImageButton) findViewById(R.id.notepad);
-        notepad.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                Intent intent = new Intent(Main.this, Notepad.class);
-                startActivity(intent);
-            }
-        });
-
-        //Set goals
-        //Open the goals screen
-
-        final ImageButton setgoals = (ImageButton) findViewById(R.id.goal);
-        setgoals.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(Main.this, MenuTab.class);
-
-
-                startActivity(intent);
-            }
-        });
-
-
         //Implementing Step Counter
         steps = (TextView) findViewById(count);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -237,6 +203,26 @@ public class Main extends AppCompatActivity implements SensorEventListener {
                 Intent launch2 = new Intent(Intent.ACTION_VIEW, url2);
                 startActivity(launch2);
                 break;
+
+            //Redirects to the Notepad activity when notepad image is tapped
+            case R.id.notepad:
+                Intent intentNotepad = new Intent(Main.this, Notepad.class);
+                startActivity(intentNotepad);
+                break;
+
+            //Redirects to Goal activity when goal image is tapped
+            case R.id.goal:
+                Intent intentGoal = new Intent(Main.this, MenuTab.class);
+                startActivity(intentGoal);
+                break;
+
+            //Redirects to Weight activity when weight image is tapped
+            case R.id.weight:
+                Intent intentWeight = new Intent(Main.this, WeightLog.class);
+                startActivity(intentWeight);
+                break;
+
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -306,22 +292,18 @@ public class Main extends AppCompatActivity implements SensorEventListener {
         final int MTOKM = 1000;
         TextView METER = (TextView) findViewById(R.id.meter);
         float distanceinM = 0;
-        //float distanceinM = (float) (CENTIMETER * steps);
-        //float distanceinKM = (float) (CENTIMETER * steps) / CONVERSION;
+
         if(distanceinM <= MTOKM)
         {
             METER.setText("meters");
             METER.setTextSize(20);
             distanceinM = (float) (CENTIMETER * steps);
-            //return distanceinM;
         }
         if (distanceinM >= MTOKM)
         {
             METER.setText("kilometers");
             METER.setTextSize(15);
             distanceinM = (float) (CENTIMETER * steps) / CONVERSION;
-            //return distanceinM;
-            //return distanceinKM;
         }
         return distanceinM;
     }
