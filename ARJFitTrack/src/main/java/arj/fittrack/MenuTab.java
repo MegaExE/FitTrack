@@ -151,6 +151,21 @@ public class MenuTab extends AppCompatActivity {
                 Intent launch2 = new Intent(Intent.ACTION_VIEW, url2);
                 startActivity(launch2);
                 break;
+
+            /*
+            Need to add these into MenuTab so user can redirect MenuTab to other activities
+            Redirects to the Notepad activity when notepad image is tapped
+            */
+            case R.id.notepad:
+                Intent intentNotepad = new Intent(MenuTab.this, Notepad.class);
+                startActivity(intentNotepad);
+                break;
+
+            //Redirects to Weight activity when weight image is tapped
+            case R.id.weight:
+                Intent intentWeight = new Intent(MenuTab.this, WeightLog.class);
+                startActivity(intentWeight);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
