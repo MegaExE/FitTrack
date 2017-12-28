@@ -42,7 +42,7 @@
 
 
     <!-- strings for Challenges -->
-    <string name="ChallengeList">List of Challenge</string>
+    <string name="ChallengeList">List of Challenges:</string>
     <string name="Challenge">Challenge</string>
 
     <!-- strings for Notes -->
