@@ -16,8 +16,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -83,7 +86,6 @@ public class Goal extends Fragment {
         String[] goals = {""};
 
 
-
         //Create an ArrayList object to store the user's goal
         arrayList = new ArrayList<>(Arrays.asList(goals));
         //adapter=new ArrayAdapter<String>(this,R.layout.list_item,R.id.txtitem,android.R.layout.simple_list_item_multiple_choice,arrayList);
@@ -102,9 +104,16 @@ public class Goal extends Fragment {
         String data = helper.getData_Goals();
         String[] test = data.split("\n");
         //Displays the user's goals
-        for(String savegoals : test) {
+        /*for(String savegoals : test) {
             arrayList.add(savegoals);
-        }
+        }*/
+        // DataSnapshot dataSnapshot;
+
+
+
+
+        //UserGoal goal;
+       // arrayList.add(goal.getgoal());
 
         //User's input for adding the Goals
         input = (EditText) view.findViewById(R.id.editText);
@@ -282,6 +291,23 @@ public class Goal extends Fragment {
         Message.message(getActivity().getApplicationContext(),data);
     }*/
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    databaseRefGoal.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            for (DataSnapshot goalsnapshot : dataSnapshot.getChildren()) {
+                UserGoal goal = goalsnapshot.getValue(UserGoal.class);
+                arrayList.add(goal.getgoal());
+            }
+        }
 
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
 
+        }
+    });
+
+    }
 }
