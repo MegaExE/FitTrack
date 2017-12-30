@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -45,6 +48,9 @@ public class Goal extends Fragment {
     //Declared the Context for Dialog
     //final Goal context = this;
 
+    //Firebase
+    DatabaseReference databaseRefGoal;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +73,8 @@ public class Goal extends Fragment {
 
         //Initialize the DatabaseHelper
         helper = new myDbAdapter(getActivity().getApplicationContext());
+
+        databaseRefGoal = FirebaseDatabase.getInstance().getReference("goal");
 
         //Creates the ListView
         ListView listView = (ListView) view.findViewById(R.id.listv);
@@ -147,6 +155,8 @@ public class Goal extends Fragment {
 
 
 
+
+
                             }
                         });
                 // create alert dialog
@@ -181,9 +191,17 @@ public class Goal extends Fragment {
                     arrayList.add(input.getText().toString());
                     adapter.notifyDataSetChanged();
 
+                    String goal = input.getText().toString();
+
+                    String id = databaseRefGoal.push().getKey();
+                    UserGoal userGoal = new UserGoal(id,goal);
+                    databaseRefGoal.child(id).setValue(userGoal);
+                    Message.message(getActivity().getApplicationContext(),"Goal Added!");
+
+
 
                     //Add the user's goal to the database
-                    long id = helper.insertData_Goal(goals);
+                   /* long id = helper.insertData_Goal(goals);
                     if(id<0)
                     {
                         Message.message(getActivity().getApplicationContext(),"Insertion Unsuccessful");
@@ -193,7 +211,7 @@ public class Goal extends Fragment {
                     {
                         Message.message(getActivity().getApplicationContext(),"Insertion Successful");
                         input.setText("");
-                    }
+                    }*/
 
                 }
             }
