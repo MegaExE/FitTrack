@@ -83,7 +83,7 @@ public class Goal extends Fragment {
         adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
 
         //set multiple selection mode
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        //listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
         //Testing
         //arrayList.add("Test");
@@ -133,6 +133,8 @@ public class Goal extends Fragment {
                             public void onClick(DialogInterface dialog, int id) {
                                 // if this button is clicked
                                 // delete the goal
+
+                                
 
                                 long i = helper.delete_goals(selectedItem);
                                 if (i <= 0) {
