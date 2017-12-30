@@ -69,7 +69,7 @@ public class Goal extends Fragment {
         helper = new myDbAdapter(getActivity().getApplicationContext());
 
         //Creates the ListView
-         ListView listView = (ListView) view.findViewById(R.id.listv);
+        ListView listView = (ListView) view.findViewById(R.id.listv);
 
         //Stores the user's goal
         String[] goals = {""};
@@ -80,7 +80,7 @@ public class Goal extends Fragment {
         arrayList = new ArrayList<>(Arrays.asList(goals));
         //adapter=new ArrayAdapter<String>(this,R.layout.list_item,R.id.txtitem,android.R.layout.simple_list_item_multiple_choice,arrayList);
         //Supply data items to Checkbox Listview
-        adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
+        adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
 
         //set multiple selection mode
         //listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -134,7 +134,7 @@ public class Goal extends Fragment {
                                 // if this button is clicked
                                 // delete the goal
 
-                                
+
 
                                 long i = helper.delete_goals(selectedItem);
                                 if (i <= 0) {

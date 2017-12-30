@@ -3,6 +3,7 @@ package arj.fittrack;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,8 +14,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,46 +40,13 @@ public class Main extends AppCompatActivity implements SensorEventListener {
     //TextView for calories burnt
     TextView calories;
 
-
+    String displaySteps;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //ImageButton for Weight Activity (dumbbell)
-        final ImageButton weight = (ImageButton) findViewById(R.id.weight);
-        weight.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                Intent intent = new Intent(Main.this, WeightLog.class);
-                startActivity(intent);
-            }
-        });
-
-        //ImageButton for Notepad Activity (notepad)
-        final ImageButton notepad = (ImageButton) findViewById(R.id.notepad);
-        notepad.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                Intent intent = new Intent(Main.this, Notepad.class);
-                startActivity(intent);
-            }
-        });
-
-        //Set goals
-        //Open the goals screen
-
-        final ImageButton setgoals = (ImageButton) findViewById(R.id.goal);
-        setgoals.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(Main.this, MenuTab.class);
-
-
-                startActivity(intent);
-            }
-        });
 
         //Implementing Step Counter
         steps = (TextView) findViewById(count);
@@ -93,16 +59,39 @@ public class Main extends AppCompatActivity implements SensorEventListener {
 
         //Implementing Calories Calculator
         calories = (TextView) findViewById(R.id.cals);
-
 /*
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences pref = getSharedPreferences("StoredData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
 
-        editor.putString("steps", steps.getText().toString());
-        editor.putString("distance", distance.getText().toString());
-        editor.putString("calories",calories.getText().toString());
+        String displaySteps = steps.getText().toString();
+        editor.putString("steps", displaySteps);
         editor.commit();
 */
+        SharedPreferences preferences = getSharedPreferences("Test3", Context.MODE_PRIVATE);
+        String getSteps = preferences.getString("steps", steps.getText().toString());
+        String getDistance = preferences.getString("distance", distance.getText().toString());
+        String getCalories = preferences.getString("calories", calories.getText().toString());
+        steps.setText(getSteps);
+        distance.setText(getDistance);
+        calories.setText(getCalories);
+    }
+
+    protected void onPause(){
+        super.onPause();
+
+        //int nsteps = Integer.parseInt(String.valueOf(displaySteps));
+
+        SharedPreferences pref = getSharedPreferences("Test3", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        String displaySteps = steps.getText().toString();
+        String displayDistance = distance.getText().toString();
+        String displayCalories = calories.getText().toString();
+        editor.putString("steps", displaySteps).commit();
+        editor.putString("distance", displayDistance).commit();
+        editor.putString("calories", displayCalories).commit();
+        editor.apply();
+
     }
 
     //handle Android Back Key on Main Screen, and confirm user wants to exit the app.
@@ -142,6 +131,7 @@ public class Main extends AppCompatActivity implements SensorEventListener {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -232,6 +222,26 @@ public class Main extends AppCompatActivity implements SensorEventListener {
                 Intent launch2 = new Intent(Intent.ACTION_VIEW, url2);
                 startActivity(launch2);
                 break;
+
+            //Redirects to the Notepad activity when notepad image is tapped
+            case R.id.notepad:
+                Intent intentNotepad = new Intent(Main.this, Notepad.class);
+                startActivity(intentNotepad);
+                break;
+
+            //Redirects to Goal activity when goal image is tapped
+            case R.id.goal:
+                Intent intentGoal = new Intent(Main.this, MenuTab.class);
+                startActivity(intentGoal);
+                break;
+
+            //Redirects to Weight activity when weight image is tapped
+            case R.id.weight:
+                Intent intentWeight = new Intent(Main.this, WeightLog.class);
+                startActivity(intentWeight);
+                break;
+
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -247,10 +257,26 @@ public class Main extends AppCompatActivity implements SensorEventListener {
         if (values.length > 0) {
             value = (int) values[0];
         }
+
+        //Used to display the step counter but also the distance and calories.
         if (sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+
             steps.setText(String.valueOf(Math.round(sensorEvent.values[0])));
             distance.setText(String.valueOf(String.format("%.2f",distanceTraval(sensorEvent.values[0]))));
             calories.setText(String.valueOf(String.format("%.1f",caloriesBurnt(sensorEvent.values[0]))));
+/*
+            //Context.MODE_PRIVATE | Context.MODE_APPEND
+            SharedPreferences pref = getSharedPreferences("Test2", 0);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.clear();
+            displaySteps = steps.getText().toString();
+            String displayDistance = distance.getText().toString();
+            String displayCalories = calories.getText().toString();
+            editor.putString("steps", displaySteps);
+            editor.putString("distance", displayDistance);
+            editor.putString("calories", displayCalories);
+            editor.commit();
+    */
             //distance.setText(String.valueOf(distanceTraval(sensorEvent.values[0])));
             //distance.setText(String.valueOf(distanceTraval(step)));
             //step++;
@@ -271,43 +297,37 @@ public class Main extends AppCompatActivity implements SensorEventListener {
         sensorManager.registerListener(this, stepDetector, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //distance.setText(String.valueOf(distanceTraval(step)));
-    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
 
+    //Formula used to calculate the distance
     public float distanceTraval(float steps){
         //78 cm is the average step length for men while 70cm is for woman. I used 0.74 because it is a median.
         final float CENTIMETER = 0.74f;
         final float CONVERSION = 1000f;
+        final int MTOKM = 1000;
         TextView METER = (TextView) findViewById(R.id.meter);
         float distanceinM = 0;
-        //float distanceinM = (float) (CENTIMETER * steps);
-        //float distanceinKM = (float) (CENTIMETER * steps) / CONVERSION;
-        if(distanceinM <= 1000)
+
+        if(distanceinM <= MTOKM)
         {
             METER.setText("meters");
             METER.setTextSize(20);
             distanceinM = (float) (CENTIMETER * steps);
-            //return distanceinM;
         }
-        if (distanceinM >= 1000)
+        if (distanceinM >= MTOKM)
         {
             METER.setText("kilometers");
             METER.setTextSize(15);
             distanceinM = (float) (CENTIMETER * steps) / CONVERSION;
-            //return distanceinM;
-            //return distanceinKM;
         }
         return distanceinM;
     }
 
+    //Formula used to calculate calories burnt
     public float caloriesBurnt(float steps){
         //A person burns 0.05 calories per step; rough estimate
         final float CALORIES_PER_STEP = 0.05f;

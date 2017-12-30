@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="arj.fittrack">
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -44,12 +47,12 @@
         <activity
             android:name=".MenuTab"
             android:label="@string/title_activity_menu_tab"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".Main"></activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
+        <!--
         <uses-permission
             android:name="android.permission.BODY_SENSORS" />
-
+        -->
     </application>
 
 

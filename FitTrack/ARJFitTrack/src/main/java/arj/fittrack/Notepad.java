@@ -58,7 +58,7 @@ public class Notepad  extends AppCompatActivity {
 
 
     }
-
+   // this will allow the user to save the note that they typed.  It will show a toast when the user clicks on the save button
     public void Save(String fileName) {
         try {
             OutputStreamWriter out =
@@ -71,7 +71,7 @@ public class Notepad  extends AppCompatActivity {
         }
     }
 
-
+    // this will allow the user to open the note that was stored in the file that they saved it to.
     public String Open(String fileName) {
         String content = "";
         if (FileExists(fileName)) {
@@ -93,11 +93,13 @@ public class Notepad  extends AppCompatActivity {
         }
         return content;
     }
-
+     // checks if File where note is stored exists
     public boolean FileExists(String fname){
         File file = getBaseContext().getFileStreamPath(fname);
         return file.exists();
     }
+
+
 
 
 
@@ -112,8 +114,8 @@ public class Notepad  extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
 
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
