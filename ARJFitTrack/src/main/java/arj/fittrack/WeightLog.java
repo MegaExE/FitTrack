@@ -1,16 +1,17 @@
 package arj.fittrack;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Bundle;
 //import android.os.Message;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,9 +19,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.text.InputType;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+
+
+import java.util.Date;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.jar.Attributes;
 
 /**
@@ -29,16 +41,22 @@ import java.util.jar.Attributes;
  */
 
 public class WeightLog extends AppCompatActivity {
+    /*
     EditText Weight , DeleteWeight, bWeight, bHeight;
     TextView Result;
     myDbAdapter helper;
+    */
+    //
     final Context context = this;
-
+    private FirebaseAuth firebaseAuth;
+    DatabaseReference databaseRefWeight;
+    EditText inputWeight;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weightactivity);
-
+        //firebaseAuth = FirebaseAuth.getInstance(); initializing firebase authenication object
+        /*
         //Retrieve the input from user using EditText
         //Weight = (EditText) findViewById(R.id.weight);
         DeleteWeight = (EditText) findViewById(R.id.editDelete);
@@ -49,15 +67,18 @@ public class WeightLog extends AppCompatActivity {
         //Uses a TextView to display the result
         Result = (TextView) findViewById(R.id.result);
         helper = new myDbAdapter(this);
+        */
+        databaseRefWeight = FirebaseDatabase.getInstance().getReference("weight");
 
         final ImageButton addWeight = (ImageButton) findViewById(R.id.add);
         addWeight.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(WeightLog.this);
                 alertDialog.setTitle("WEIGHT");
-                alertDialog.setMessage("Enter Weight");
+                alertDialog.setMessage("Enter Weight in pounds (LB)");
 
                 final EditText inputWeight = new EditText(WeightLog.this);
+                inputWeight.setId(R.id.inWeight);
                 inputWeight.setInputType(InputType.TYPE_CLASS_NUMBER);
                 //Creates a new layout parameters with the specifed width and height
                 LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -68,20 +89,22 @@ public class WeightLog extends AppCompatActivity {
                 alertDialog.setPositiveButton("Add",
                     new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog, int which){
+                            //String weight = inputWeight.getText().toString();
+                            //UserWeight userWeight = new UserWeight(weight);
                             String weight = inputWeight.getText().toString();
-                            if(weight.isEmpty())
+                            if(!TextUtils.isEmpty(weight))
                             {
-                                Message.message(getApplicationContext(),"enter a weight");
+                                String id = databaseRefWeight.push().getKey();
+                                String currentDate = java.text.DateFormat.getDateTimeInstance().format(new Date());
+                                UserWeight userWeight = new UserWeight(id, weight, currentDate);
+                                databaseRefWeight.child(id).setValue(userWeight);
+                                Message.message(getApplicationContext(),"Weight Added!");
                             }
-                            else {
-                                long id = helper.insertData_Weight(weight);
-                                if (id <= 0) {
-                                    Message.message(getApplicationContext(), "Insert Unsuccessful");
-                                    Weight.setText("");
-                                } else {
-                                    Message.message(getApplicationContext(), "Insert Successful");
-                                    Weight.setText("");
-                                }
+                            else
+                            {
+                                Message.message(getApplicationContext(),"Please enter a weight in LB");
+                                //stop the execution
+                                return;
                             }
                         }
                     });
@@ -96,7 +119,41 @@ public class WeightLog extends AppCompatActivity {
             }
         });
     }
+/*
+    public void registerWeight(){
+        String weight = inputWeight.getText().toString();
+        if(!TextUtils.isEmpty(weight))
+        {
+            String id = databaseRefWeight.push().getKey();
+            UserWeight userWeight = new UserWeight(id, weight);
+            databaseRefWeight.child(id).setValue(userWeight);
+            Message.message(getApplicationContext(),"Weight Added!");
+        }
+        else
+        {
+            Message.message(getApplicationContext(),"Please enter a weight");
+            //stop the execution
+            //return;
+        }
+*/
+/*
+        if(weight.isEmpty())
+        {
+            Message.message(getApplicationContext(),"Please enter a weight");
+        }
+        else {
+            long id = helper.insertData_Weight(weight);
+            if (id <= 0) {
+                Message.message(getApplicationContext(), "Insert Unsuccessful");
+                Weight.setText("");
+            } else {
+                Message.message(getApplicationContext(), "Insert Successful");
+                Weight.setText("");
+            }
+        }
 
+    }
+*/
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -233,7 +290,7 @@ public class WeightLog extends AppCompatActivity {
             }
         }
     }
-*/
+
     //Function is used to display weight from the input
     public void viewdata(View view) {
         String data = helper.getData_Weight();
@@ -278,6 +335,7 @@ public class WeightLog extends AppCompatActivity {
             return "You are obese!";
         }
     }
+    */
 /*
     public void update( View view)
     {
@@ -303,7 +361,7 @@ public class WeightLog extends AppCompatActivity {
         }
     }
     */
-
+    /*
     //used to delete a weight if user entered wrong weight
     public void delete(View view)
     {
@@ -326,4 +384,5 @@ public class WeightLog extends AppCompatActivity {
             }
         }
     }
+    */
 }
