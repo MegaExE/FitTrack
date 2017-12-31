@@ -33,17 +33,17 @@ import java.util.Arrays;
 public class Goal extends Fragment {
     private static final String PREFS_NAME = "prefs";
     private static final String PREF_DARK_THEME = "dark_theme";
-
-
-
+    
     //Declare ArrayList, ArrayAdapter and EditText
     static ArrayList<String> arrayList;
+    ArrayList<String> goalidlist;
     static ArrayAdapter<String> adapter;
     EditText input;
 
     //create an ArrayList object to store selected items
     ArrayList<String> selectedItems;
 
+    ListView listView;
 
     //Declare Database
     myDbAdapter helper;
@@ -53,6 +53,10 @@ public class Goal extends Fragment {
 
     //Firebase
     DatabaseReference databaseRefGoal;
+
+    int num = 0;
+
+    String[] goalid = new String[num];
 
     @Nullable
     @Override
@@ -79,8 +83,7 @@ public class Goal extends Fragment {
 
         databaseRefGoal = FirebaseDatabase.getInstance().getReference("goal");
 
-        //Creates the ListView
-        ListView listView = (ListView) view.findViewById(R.id.listv);
+
 
         //Stores the user's goal
         String[] goals = {""};
@@ -90,7 +93,7 @@ public class Goal extends Fragment {
         arrayList = new ArrayList<>(Arrays.asList(goals));
         //adapter=new ArrayAdapter<String>(this,R.layout.list_item,R.id.txtitem,android.R.layout.simple_list_item_multiple_choice,arrayList);
         //Supply data items to Checkbox Listview
-        adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
+
 
         //set multiple selection mode
         //listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -98,39 +101,43 @@ public class Goal extends Fragment {
         //Testing
         //arrayList.add("Test");
 
-        listView.setAdapter(adapter);
+        //Creates the ListView
+        listView = (ListView) view.findViewById(R.id.listv);
 
-        //Gets the user's goals from the database
+
+
+       /* //Gets the user's goals from the database
         String data = helper.getData_Goals();
         String[] test = data.split("\n");
         //Displays the user's goals
         /*for(String savegoals : test) {
             arrayList.add(savegoals);
         }*/
-        // DataSnapshot dataSnapshot;
+        // DataSnapshot dataSnapshot;*/
 
-
-
-
-        //UserGoal goal;
-       // arrayList.add(goal.getgoal());
 
         //User's input for adding the Goals
         input = (EditText) view.findViewById(R.id.editText);
 
-        //Create an ArrayList object to store the goals that has been checkmark
+        //Create an ArrayList object to store the goals that has been click on the list view
         selectedItems = new ArrayList<String>();
+        goalidlist = new ArrayList<String>();
 
 
 
         //set OnItemClickListener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 final String selectedItem = ((TextView) view).getText().toString();
               /*  if(selectedItems.contains(selectedItem))
                     selectedItems.remove(selectedItem); //remove deselected item from the list of selected items
                 else
                     selectedItems.add(selectedItem); //add selected item to the list of selected items*/
+
+                //current position in that the user click on the listview
+                //Message.message(getActivity().getApplicationContext(), String.valueOf(position));
+
+
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 // set title
                 alertDialogBuilder.setTitle("Delete");
@@ -151,20 +158,20 @@ public class Goal extends Fragment {
                                 // if this button is clicked
                                 // delete the goal
 
+                                //Find the usergoal to be deleted
+                                DatabaseReference drgoal = FirebaseDatabase.getInstance().getReference("goal").child(goalidlist.get(position));
+                                //Delete the user's goal
+                                drgoal.removeValue();
+                                Message.message(getActivity().getApplicationContext(),"Goal Deleted");
 
-
-                                long i = helper.delete_goals(selectedItem);
+                                /*long i = helper.delete_goals(selectedItem);
                                 if (i <= 0) {
                                     Message.message(getActivity().getApplicationContext(), "Unable to delete goal");
 
                                 } else {
                                     Message.message(getActivity().getApplicationContext(), "Goal deleted");
 
-                                }
-
-
-
-
+                                }*/
 
                             }
                         });
@@ -193,22 +200,18 @@ public class Goal extends Fragment {
                     Message.message(getActivity().getApplicationContext(),"Enter a goal");
                 }else {
 
-                    // tv1 = (TextView) getActivity().findViewById(R.id.textView2);
-                    //tv1.setText(input.getText().toString());
-
                     //Add the user's goal to the array and display the goal in the ListView
                     arrayList.add(input.getText().toString());
-                    adapter.notifyDataSetChanged();
 
                     String goal = input.getText().toString();
 
                     String id = databaseRefGoal.push().getKey();
                     UserGoal userGoal = new UserGoal(id,goal);
                     databaseRefGoal.child(id).setValue(userGoal);
-                    Message.message(getActivity().getApplicationContext(),"Goal Added!");
+                    Message.message(getActivity().getApplicationContext(),"Goal Added");
 
 
-
+                    adapter.notifyDataSetChanged();
                     //Add the user's goal to the database
                    /* long id = helper.insertData_Goal(goals);
                     if(id<0)
@@ -269,17 +272,9 @@ public class Goal extends Fragment {
                     }
                     // arrayList.remove(goals); //remove the user's goals
                     /// adapter.notifyDataSetChanged();
-
-
                 }
 
-
-
-
-
         });*/
-
-
         return view;
     }
 
@@ -297,10 +292,17 @@ public class Goal extends Fragment {
     databaseRefGoal.addValueEventListener(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
+
+            arrayList.clear();
+            goalidlist.clear();
+            //Retrieve the User's goal and goal id and display it on List of goals
             for (DataSnapshot goalsnapshot : dataSnapshot.getChildren()) {
                 UserGoal goal = goalsnapshot.getValue(UserGoal.class);
                 arrayList.add(goal.getgoal());
+                goalidlist.add(goal.getgoalID());
             }
+            adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
+            listView.setAdapter(adapter);
         }
 
         @Override
