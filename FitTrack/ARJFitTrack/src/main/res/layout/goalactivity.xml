@@ -14,30 +14,19 @@
         tools:layout_editor_absoluteX="10dp"
         tools:layout_editor_absoluteY="10dp">
 
-        <Button
-            android:id="@+id/deletegoal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:text="@string/Deletegoals"
-            app:layout_constraintBaseline_toBaselineOf="@+id/setgoal"
-            app:layout_constraintLeft_toLeftOf="@+id/editText"
-            tools:layout_constraintBaseline_creator="1"
-            tools:layout_constraintLeft_creator="1" />
-
         <EditText
             android:id="@+id/editText"
             android:layout_width="168dp"
             android:layout_height="42dp"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
+            android:layout_marginStart="74dp"
             tools:layout_constraintTop_creator="1"
-            android:layout_marginStart="58dp"
-            android:layout_marginTop="54dp"
+            android:layout_marginTop="27dp"
             tools:layout_constraintLeft_creator="1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="64dp" />
+            android:layout_marginLeft="78dp" />
 
         <Button
             android:id="@+id/setgoal"
@@ -45,23 +34,25 @@
             android:layout_height="wrap_content"
             android:text="@string/Setgoals"
             tools:layout_constraintTop_creator="1"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="16dp"
+            tools:layout_constraintRight_creator="1"
+            app:layout_constraintRight_toRightOf="@+id/goallist"
+            android:layout_marginTop="18dp"
             app:layout_constraintTop_toBottomOf="@+id/editText"
             tools:layout_constraintLeft_creator="1"
-            app:layout_constraintLeft_toRightOf="@+id/deletegoal" />
+            app:layout_constraintLeft_toRightOf="@+id/goallist" />
 
         <TextView
             android:id="@+id/goallist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/listgoal"
-            android:textSize="24sp"
             android:layout_marginStart="16dp"
+            android:text="@string/listgoal"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
             tools:layout_constraintBottom_creator="1"
             app:layout_constraintBottom_toTopOf="@+id/listv"
             tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="7dp"
             app:layout_constraintLeft_toLeftOf="parent" />
 
         <ListView
@@ -71,8 +62,8 @@
             tools:layout_constraintTop_creator="1"
             tools:layout_constraintRight_creator="1"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="49dp"
-            app:layout_constraintTop_toBottomOf="@+id/deletegoal"
+            android:layout_marginTop="60dp"
+            app:layout_constraintTop_toBottomOf="@+id/setgoal"
             tools:layout_constraintLeft_creator="1"
             app:layout_constraintLeft_toLeftOf="parent">
 
