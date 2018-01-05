@@ -1,6 +1,9 @@
 <resources>
     <string name="step_counter">android.hardware.sensor.stepcounter</string>
     <string name="step_detector">android.hardware.sensor.stepdetector</string>
+
+    <string name="sdistance"> </string>
+    <string name="scalories"> </string>
     <!-- strings for Splash -->
     <string name="teamname">Team ARJ Presents</string>
 
@@ -42,7 +45,7 @@
 
 
     <!-- strings for Challenges -->
-    <string name="ChallengeList">List of Challenge</string>
+    <string name="ChallengeList">List of Challenges:</string>
     <string name="Challenge">Challenge</string>
 
     <!-- strings for Notes -->

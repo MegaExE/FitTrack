@@ -41,7 +41,7 @@ public class myDbAdapter {
     }
 
 
-   public long insertData_Challengnes(String goals)
+    public long insertData_Challengnes(String goals)
     {
         SQLiteDatabase dbb = myhelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

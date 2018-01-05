@@ -31,6 +31,8 @@ public class Challenges extends Fragment {
     //Declare Database
     myDbAdapter helper;
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class Challenges extends Fragment {
 
 
         //Initialize the DatabaseHelper
-        helper = new myDbAdapter((getActivity().getApplicationContext()));
+        helper = new myDbAdapter(getActivity().getApplicationContext());
 
 
         //create an ArrayList object to store selected items
@@ -70,7 +72,7 @@ public class Challenges extends Fragment {
 
 
         //This section will be storing the Challenges and Task in a String
-        String[] items={" "};
+        String[] items = new String[0];
 
         //Create an ArrayList object to store the challenges and tasks
         arrayList = new ArrayList<>(Arrays.asList(items));
@@ -85,7 +87,7 @@ public class Challenges extends Fragment {
 
         //supply data items to Checkbox ListView
         //ArrayAdapter<String> aa=new ArrayAdapter<String>(this,R.layout.checkablelist,R.id.txt_title,items);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>((getActivity().getApplicationContext()), android.R.layout.simple_list_item_multiple_choice, arrayList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
 
         chl.setAdapter(adapter);
 

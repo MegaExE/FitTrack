@@ -27,10 +27,9 @@ import java.io.OutputStreamWriter;
 
 public class Notepad  extends AppCompatActivity {
 
-    //Declare values
+
     EditText EditText1;
     final Context context = this;
-
 
 
 
@@ -43,7 +42,7 @@ public class Notepad  extends AppCompatActivity {
         EditText1 = (EditText)findViewById(R.id.EditText1);
 
 
-        // Floating Action Button is where the save method gets called
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,10 +58,9 @@ public class Notepad  extends AppCompatActivity {
 
 
     }
-     // this will allow the user to save the note that they typed.  It will show a toast when the user clicks on the save button
+   // this will allow the user to save the note that they typed.  It will show a toast when the user clicks on the save button
     public void Save(String fileName) {
         try {
-        //filenotfoundexception might occur so the try and catch is necessary.
             OutputStreamWriter out =
                     new OutputStreamWriter(openFileOutput(fileName, 0));
             out.write(EditText1.getText().toString());
@@ -73,7 +71,7 @@ public class Notepad  extends AppCompatActivity {
         }
     }
 
-    //this will allow the user to open the note that was stored in the file that they saved it to.
+    // this will allow the user to open the note that was stored in the file that they saved it to.
     public String Open(String fileName) {
         String content = "";
         if (FileExists(fileName)) {
@@ -95,20 +93,29 @@ public class Notepad  extends AppCompatActivity {
         }
         return content;
     }
-
-    //checks if File where note is stored exists
+     // checks if File where note is stored exists
     public boolean FileExists(String fname){
         File file = getBaseContext().getFileStreamPath(fname);
         return file.exists();
     }
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
 
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

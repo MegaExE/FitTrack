@@ -33,13 +33,10 @@
         android:text="@string/StepsCounter"
         android:textColor="@color/green"
         android:textSize="24sp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/imageView7"
         android:layout_marginStart="16dp"
+        tools:layout_constraintTop_creator="1"
         android:layout_marginTop="16dp"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="19dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,31 +54,33 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/distance"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+        android:layout_marginEnd="4dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/stepcounter"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="43dp"
-        app:layout_constraintTop_toTopOf="@+id/stepcounter"
-        app:layout_constraintLeft_toRightOf="@+id/imageView7" />
+        android:layout_marginBottom="11dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <ImageView
         android:layout_width="0dp"
-        android:layout_height="44dp"
+        android:layout_height="65dp"
         android:src="@drawable/walkingicon"
         android:id="@+id/imageView7"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="8dp"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/distance"
-        android:layout_marginEnd="15dp"
         app:layout_constraintRight_toRightOf="@+id/stepcounter"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintTop_toBottomOf="@+id/stepcounter"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="55dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="48dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:id="@+id/distance"
@@ -91,20 +90,20 @@
         android:text="@string/Distance"
         android:textColor="@color/green"
         android:textSize="24sp"
-        app:layout_constraintRight_toLeftOf="@+id/goal"
+        android:layout_marginStart="16dp"
         tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="17dp"
-        android:layout_marginTop="139dp"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/calsburnt"
+        android:layout_marginTop="117dp"
+        app:layout_constraintTop_toBottomOf="@+id/stepcounter"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/notepad"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="117dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:id="@+id/travelled"
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="77dp"
         android:fontFamily="casual"
         android:text="0"
         android:textColor="@color/pink"
@@ -113,25 +112,29 @@
         android:gravity="center"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/count"
-        android:layout_marginTop="49dp"
-        app:layout_constraintTop_toBottomOf="@+id/count"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/count" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="58dp"
+        android:layout_width="74dp"
+        android:layout_height="0dp"
         android:src="@drawable/distanceicon"
         android:id="@+id/imageView6"
-        app:layout_constraintRight_toLeftOf="@+id/travelled"
-        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/imageView8"
-        android:layout_marginEnd="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/calsburnt"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="78dp"
-        app:layout_constraintLeft_toLeftOf="@+id/calsburnt" />
+        android:layout_marginBottom="14dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/travelled" />
 
     <TextView
         android:id="@+id/calsburnt"
@@ -139,15 +142,16 @@
         android:layout_height="29dp"
         android:fontFamily="casual"
         android:text="@string/Calories"
-        android:textColor="@color/red"
+        android:textColor="@color/green"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501"
+        android:layout_marginStart="16dp"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/cals"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/travelled"
         tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="12dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
@@ -160,114 +164,55 @@
         android:textSize="60sp"
         android:background="@drawable/tab"
         android:gravity="center"
-        tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/travelled"
-        android:layout_marginTop="54dp"
-        app:layout_constraintTop_toBottomOf="@+id/travelled"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/calories"
+        tools:layout_constraintBaseline_creator="1"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/travelled" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:id="@+id/calories"
-        android:layout_width="51dp"
-        android:layout_height="23dp"
+        android:layout_width="54dp"
+        android:layout_height="30dp"
         android:text="@string/cal"
         android:textColor="@color/black"
         android:textSize="20sp"
+        android:layout_marginEnd="40dp"
         tools:layout_constraintRight_creator="1"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@+id/cals"
-        tools:layout_constraintBaseline_creator="1" />
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/cals"
+        android:layout_marginBottom="78dp" />
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="43dp"
+        android:layout_width="74dp"
+        android:layout_height="62dp"
         android:src="@drawable/caloriesburnticon"
         android:id="@+id/imageView8"
         tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/notepad"
-        app:layout_constraintRight_toRightOf="@+id/imageView6"
-        android:layout_marginTop="42dp"
-        app:layout_constraintTop_toBottomOf="@+id/calsburnt"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="61dp"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="43dp"
-        app:layout_constraintLeft_toLeftOf="@+id/imageView6" />
+        android:layout_marginBottom="70dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/calsburnt" />
 
     <TextView
         android:id="@+id/meter"
-        android:layout_width="84dp"
-        android:layout_height="21dp"
+        android:layout_width="88dp"
+        android:layout_height="29dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        tools:layout_constraintTop_creator="1"
+        android:layout_marginEnd="22dp"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/calsburnt"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="37dp"
-        android:layout_marginBottom="36dp"
-        app:layout_constraintTop_toTopOf="@+id/travelled" />
-
-    <ImageButton
-        android:id="@+id/notepad"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="fitCenter"
-        android:background="@android:color/transparent"
-        android:src="@drawable/notepadicon"
-        app:layout_constraintRight_toLeftOf="@+id/goal"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="17dp"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/goal" />
-
-    <ImageButton
-        android:id="@+id/weight"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/weighticon"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="19dp"
-        app:layout_constraintBottom_toBottomOf="@+id/goal"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintTop_toTopOf="@+id/notepad"
-        app:layout_constraintLeft_toRightOf="@+id/goal" />
-
-    <ImageButton
-        android:layout_width="102dp"
-        android:layout_height="0dp"
-        android:id="@+id/goal"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/goalicon"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="23dp"
-        app:layout_constraintTop_toBottomOf="@+id/cals"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="11dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
+        app:layout_constraintRight_toRightOf="@+id/travelled"
+        app:layout_constraintBaseline_toBaselineOf="@+id/travelled"
+        tools:layout_constraintBaseline_creator="1" />
 
 
 </android.support.constraint.ConstraintLayout>
-
