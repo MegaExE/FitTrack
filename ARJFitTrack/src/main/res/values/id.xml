@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- id.xml needed to defined EditText ID in WeightLog -->
+    <item type="id" name="inWeight" />
+</resources>
