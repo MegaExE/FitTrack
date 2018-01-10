@@ -55,19 +55,6 @@ public class WeightLog extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weightactivity);
-        //firebaseAuth = FirebaseAuth.getInstance(); initializing firebase authenication object
-        /*
-        //Retrieve the input from user using EditText
-        //Weight = (EditText) findViewById(R.id.weight);
-        DeleteWeight = (EditText) findViewById(R.id.editDelete);
-        //Retrieve input to calculate BMI
-        bWeight = (EditText) findViewById(R.id.bmiWeight);
-        bHeight = (EditText) findViewById(R.id.bmiHeight);
-
-        //Uses a TextView to display the result
-        Result = (TextView) findViewById(R.id.result);
-        helper = new myDbAdapter(this);
-        */
         databaseRefWeight = FirebaseDatabase.getInstance().getReference("weight");
 
         final ImageButton addWeight = (ImageButton) findViewById(R.id.add);
@@ -104,7 +91,7 @@ public class WeightLog extends AppCompatActivity {
                             {
                                 Message.message(getApplicationContext(),"Please enter a weight in LB");
                                 //stop the execution
-                                return;
+                                //return;
                             }
                         }
                     });
@@ -119,41 +106,7 @@ public class WeightLog extends AppCompatActivity {
             }
         });
     }
-/*
-    public void registerWeight(){
-        String weight = inputWeight.getText().toString();
-        if(!TextUtils.isEmpty(weight))
-        {
-            String id = databaseRefWeight.push().getKey();
-            UserWeight userWeight = new UserWeight(id, weight);
-            databaseRefWeight.child(id).setValue(userWeight);
-            Message.message(getApplicationContext(),"Weight Added!");
-        }
-        else
-        {
-            Message.message(getApplicationContext(),"Please enter a weight");
-            //stop the execution
-            //return;
-        }
-*/
-/*
-        if(weight.isEmpty())
-        {
-            Message.message(getApplicationContext(),"Please enter a weight");
-        }
-        else {
-            long id = helper.insertData_Weight(weight);
-            if (id <= 0) {
-                Message.message(getApplicationContext(), "Insert Unsuccessful");
-                Weight.setText("");
-            } else {
-                Message.message(getApplicationContext(), "Insert Successful");
-                Weight.setText("");
-            }
-        }
 
-    }
-*/
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);

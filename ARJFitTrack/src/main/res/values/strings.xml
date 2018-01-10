@@ -2,8 +2,6 @@
     <string name="step_counter">android.hardware.sensor.stepcounter</string>
     <string name="step_detector">android.hardware.sensor.stepdetector</string>
 
-    <string name="sdistance"> </string>
-    <string name="scalories"> </string>
     <!-- strings for Splash -->
     <string name="teamname">Team ARJ Presents</string>
 
@@ -30,6 +28,9 @@
     <string name="Calories">Calories Burnt</string>
     <string name="cal">cals</string>
 
+    <!-- new strings added into Main -->
+
+
     <!-- strings for weight -->
     <string name="FinalWeight">Final Weight</string>
     <string name="Weightlog">Weight Log</string>
@@ -38,6 +39,7 @@
     <string name="progressButton">Check Progress</string>
     <string name="saveButton">Save</string>
     <string name="bmi">BMI Calculator (Body Mass Index)</string>
+
     <!-- Sensors -->
     <string name="UVIndex">UV Index</string>
     <string name="Thermalarray">Thermal Array</string>
