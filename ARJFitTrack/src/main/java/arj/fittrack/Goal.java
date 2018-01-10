@@ -55,7 +55,6 @@ public class Goal extends Fragment {
     DatabaseReference databaseRefGoal;
 
     int num = 0;
-
     String[] goalid = new String[num];
 
     @Nullable
