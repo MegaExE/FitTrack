@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,20 +16,26 @@ import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.text.InputType;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import java.util.HashMap;
@@ -41,21 +48,25 @@ import java.util.jar.Attributes;
  */
 
 public class WeightLog extends AppCompatActivity {
-    /*
-    EditText Weight , DeleteWeight, bWeight, bHeight;
-    TextView Result;
-    myDbAdapter helper;
-    */
-    //
+
     final Context context = this;
-    private FirebaseAuth firebaseAuth;
-    DatabaseReference databaseRefWeight;
-    EditText inputWeight;
+    DatabaseReference databaseRefWeight, databaseRefHeight;
+    ListView listView;
+    static ArrayList<String> arrayList;
+    static ArrayAdapter<String> adapter;
+    TextView showHeight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weightactivity);
         databaseRefWeight = FirebaseDatabase.getInstance().getReference("weight");
+        databaseRefHeight = FirebaseDatabase.getInstance().getReference("height");
+
+        String[] weights = {""};
+        arrayList = new ArrayList<>(Arrays.asList(weights));
+        listView = (ListView) findViewById(R.id.listWeight);
+        showHeight = (TextView) findViewById(R.id.displayHeight);
 
         final ImageButton addWeight = (ImageButton) findViewById(R.id.add);
         addWeight.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +77,7 @@ public class WeightLog extends AppCompatActivity {
 
                 final EditText inputWeight = new EditText(WeightLog.this);
                 inputWeight.setId(R.id.inWeight);
-                inputWeight.setInputType(InputType.TYPE_CLASS_NUMBER);
+                inputWeight.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
                 //Creates a new layout parameters with the specifed width and height
                 LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                 inputWeight.setLayoutParams(layoutparams);
@@ -76,8 +87,6 @@ public class WeightLog extends AppCompatActivity {
                 alertDialog.setPositiveButton("Add",
                     new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog, int which){
-                            //String weight = inputWeight.getText().toString();
-                            //UserWeight userWeight = new UserWeight(weight);
                             String weight = inputWeight.getText().toString();
                             if(!TextUtils.isEmpty(weight))
                             {
@@ -105,6 +114,52 @@ public class WeightLog extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+
+        final ImageButton addHeight = (ImageButton) findViewById(R.id.addHeight);
+        addHeight.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(WeightLog.this);
+                alertDialog.setTitle("HEIGHT");
+                alertDialog.setMessage("Enter Height in centimeter (CM)");
+
+                final EditText inputHeight = new EditText(WeightLog.this);
+                inputHeight.setId(R.id.inHeight);
+                inputHeight.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+                //Creates a new layout parameters with the specifed width and height
+                LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                inputHeight.setLayoutParams(layoutparams);
+                alertDialog.setView(inputHeight);
+
+                //When pressed Add
+                alertDialog.setPositiveButton("Add",
+                        new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                                String height = inputHeight.getText().toString();
+                                if(!TextUtils.isEmpty(height))
+                                {
+                                    String id = databaseRefHeight.push().getKey();
+                                    UserHeight userHeight = new UserHeight(id, height);
+                                    databaseRefHeight.child(id).setValue(userHeight);
+                                    Message.message(getApplicationContext(),"Height Added!");
+                                }
+                                else
+                                {
+                                    Message.message(getApplicationContext(),"Please enter a height in CM");
+                                }
+                            }
+                        });
+                alertDialog.setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
+                alertDialog.show();
+            }
+        });
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -220,6 +275,49 @@ public class WeightLog extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void onStart(){
+        super.onStart();
+
+        databaseRefWeight.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                arrayList.clear();
+
+                for(DataSnapshot dss : dataSnapshot.getChildren()){
+                    UserWeight userWeight = dss.getValue(UserWeight.class);
+                    arrayList.add(userWeight.getDate() + getString(R.string.tab) + "Your weight: "+ userWeight.getWeight() +" LB");
+                }
+                adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+                listView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        databaseRefHeight.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dss : dataSnapshot.getChildren()){
+                    UserHeight userHeight = dss.getValue(UserHeight.class);
+
+                    String height = userHeight.getHeight();
+                    showHeight.setText(height + " CM");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
 
     //Function that adds weight when the "Add Button" is pressed. However, the field needs to contain a number otherwise a toast message will display
    /*
