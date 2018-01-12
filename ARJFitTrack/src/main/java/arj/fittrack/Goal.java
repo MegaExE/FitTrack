@@ -33,7 +33,7 @@ import java.util.Arrays;
 public class Goal extends Fragment {
     private static final String PREFS_NAME = "prefs";
     private static final String PREF_DARK_THEME = "dark_theme";
-    
+
     //Declare ArrayList, ArrayAdapter and EditText
     static ArrayList<String> arrayList;
     ArrayList<String> goalidlist;
@@ -301,7 +301,7 @@ public class Goal extends Fragment {
                 arrayList.add(goal.getgoal());
                 goalidlist.add(goal.getgoalID());
             }
-            adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
+            adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
             listView.setAdapter(adapter);
         }
 
