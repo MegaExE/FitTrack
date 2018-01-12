@@ -1,7 +1,9 @@
 package arj.fittrack;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +36,9 @@ public class Challenges extends Fragment {
     //Declare Database
     myDbAdapter helper;
 
+    //Firebase
+    DatabaseReference databaseRefGoal;
+
 
 
     @Nullable
@@ -45,6 +53,10 @@ public class Challenges extends Fragment {
         if(useDarkTheme) {
             getActivity().setTheme(R.style.AppTheme_Dark_NoActionBar);
         }*/
+
+        final SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(getActivity());
+        final SharedPreferences.Editor editor =sharedPreferences.edit();
 
         super.onCreate(savedInstanceState);
         //getActivity().setContentView(R.layout.challenges);
@@ -64,7 +76,7 @@ public class Challenges extends Fragment {
 
 
         //Create an instance of ListView
-        ListView chl=(ListView) view.findViewById(R.id.checkable_list);
+        final ListView chl=(ListView) view.findViewById(R.id.checkable_list);
         //Set multiple selection mode
         chl.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
@@ -90,7 +102,23 @@ public class Challenges extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
 
         chl.setAdapter(adapter);
+        chl.setItemChecked(0,true);
 
+        Toast.makeText((getActivity().getApplicationContext()), Integer.toString(chl.getCount()), Toast.LENGTH_LONG).show();
+
+
+        for(int i = 0; i < chl.getCount(); i++){
+            chl.setItemChecked(i,sharedPreferences.getBoolean(Integer.toString(i),false));
+            if(sharedPreferences.getBoolean(Integer.toString(i),false)){
+                chl.setItemChecked(i,true);
+            }
+            else{
+                chl.setItemChecked(i,false);
+            }
+        }
+
+
+       // chl.setChe
 
         //set OnItemClickListener
         chl.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -99,10 +127,26 @@ public class Challenges extends Fragment {
                 //TextView textview=((LinearLayout)view).findViewById(R.id.txt_title);
 
                 String selectedItem = ((TextView) view).getText().toString();
-                if(selectedItems.contains(selectedItem))
+                if (selectedItems.contains(selectedItem)){
                     selectedItems.remove(selectedItem); //remove deselected item from the list of selected items
-                else
+                editor.putBoolean(Integer.toString(position), false);
+
+                editor.commit();
+            }
+                else {
                     selectedItems.add(selectedItem); //add selected item to the list of selected items
+
+
+                    chl.setItemChecked(position,true);
+                    editor.putBoolean(Integer.toString(position),true);
+
+                    editor.commit();
+
+
+                    //selectedItem.setChecked();
+
+
+                }
 
             }
 
