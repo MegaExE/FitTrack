@@ -11,8 +11,8 @@
     tools:layout_editor_absoluteX="0dp">
 
     <ImageButton
-        android:layout_width="81dp"
-        android:layout_height="79dp"
+        android:layout_width="88dp"
+        android:layout_height="87dp"
         android:id="@+id/add"
         android:background="@drawable/addicon"
         tools:layout_constraintTop_creator="1"
@@ -21,83 +21,96 @@
         android:layout_marginTop="16dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteY="229dp"
+        app:layout_constraintHorizontal_bias="0.501" />
 
-    <!--
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/height"
-        android:inputType="numberDecimal"
-        android:hint="@string/currentHeight"
-        android:textColorHint="@android:color/white"
-        app:layout_constraintRight_toLeftOf="@+id/add"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/listWeight" />
-
-    -->
     <ImageButton
         android:id="@+id/addHeight"
-        android:layout_width="0dp"
-        android:layout_height="79dp"
+        android:layout_width="88dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="9dp"
         android:background="@drawable/redaddicon"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/add"
         app:layout_constraintRight_toRightOf="@+id/add"
-        android:layout_marginTop="12dp"
         app:layout_constraintTop_toBottomOf="@+id/add"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/add" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="34dp"
+        android:layout_width="161dp"
+        android:layout_height="37dp"
+        android:id="@+id/yourWeight"
+        android:text="@string/latestWeight"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/yourHeight"
+        app:layout_constraintRight_toRightOf="@+id/yourHeight"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="0dp"
+        tools:layout_editor_absoluteY="203dp"
+        tools:layout_editor_absoluteX="50dp" />
+
+    <TextView
+        android:layout_width="116dp"
+        android:layout_height="30dp"
+        android:id="@+id/displayWeight"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginEnd="48dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/yourWeight"
+        tools:layout_constraintBaseline_creator="1" />
+
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="30dp"
         android:id="@+id/yourHeight"
         android:text="@string/latestHeight"
         android:textColor="@color/white"
         android:textSize="25dp"
-        tools:layout_constraintTop_creator="1"
+        android:layout_marginEnd="9dp"
+        app:layout_constraintRight_toLeftOf="@+id/displayHeight"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="39dp"
-        app:layout_constraintBottom_toBottomOf="@+id/listWeight"
-        android:layout_marginEnd="23dp"
-        app:layout_constraintRight_toRightOf="@+id/addHeight"
-        android:layout_marginTop="196dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="196dp"
-        app:layout_constraintLeft_toLeftOf="@+id/listWeight"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/displayHeight"
+        tools:layout_constraintBaseline_creator="1"
+        android:layout_marginRight="7dp" />
 
     <TextView
-        android:layout_width="99dp"
-        android:layout_height="35dp"
+        android:layout_width="0dp"
+        android:layout_height="31dp"
         android:id="@+id/displayHeight"
         android:textColor="@color/white"
         android:textSize="25dp"
+        tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="58dp"
-        android:layout_marginEnd="75dp"
-        app:layout_constraintRight_toRightOf="@+id/listWeight"
-        app:layout_constraintBaseline_toBaselineOf="@+id/yourHeight"
-        tools:layout_constraintBaseline_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/displayWeight"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/addHeight" />
+        app:layout_constraintLeft_toLeftOf="@+id/displayWeight"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/listWeight"
         android:layout_width="0dp"
-        android:layout_height="196dp"
-        android:layout_marginBottom="85dp"
+        android:layout_height="0dp"
         android:background="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="39dp"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1">
+        android:layout_marginBottom="36dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/displayHeight">
 
     </ListView>
 </android.support.constraint.ConstraintLayout>
