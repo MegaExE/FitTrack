@@ -1,7 +1,8 @@
 package arj.fittrack;
 
 /**
- * Created by John on 2018-01-11.
+ *  Team Name: ARJ
+ *  Adrian Caprini N01115682, Raphael Najera N01104031, Johnson Liang N01129137
  */
 
 public class UserHeight {
