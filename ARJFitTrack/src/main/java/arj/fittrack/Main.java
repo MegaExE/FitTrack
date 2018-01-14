@@ -68,14 +68,8 @@ public class Main extends AppCompatActivity implements SensorEventListener {
 
         //Implementing Calories Calculator
         calories = (TextView) findViewById(R.id.cals);
-/*
-        SharedPreferences pref = getSharedPreferences("StoredData", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
 
-        String displaySteps = steps.getText().toString();
-        editor.putString("steps", displaySteps);
-        editor.commit();
-*/
+        //SharedPreference was used to set the text after saving
         SharedPreferences preferences = getSharedPreferences("Test3", Context.MODE_PRIVATE);
         String getSteps = preferences.getString("steps", steps.getText().toString());
         String getDistance = preferences.getString("distance", distance.getText().toString());
@@ -88,8 +82,7 @@ public class Main extends AppCompatActivity implements SensorEventListener {
     protected void onPause(){
         super.onPause();
 
-        //int nsteps = Integer.parseInt(String.valueOf(displaySteps));
-
+        //SharedPreference was used to save the strings of steps, distance, and calories
         SharedPreferences pref = getSharedPreferences("Test3", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.clear();
@@ -113,9 +106,6 @@ public class Main extends AppCompatActivity implements SensorEventListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
 
         //Menu (ToolBar)
         switch (item.getItemId()) {
@@ -126,26 +116,23 @@ public class Main extends AppCompatActivity implements SensorEventListener {
                 // set dialog message
                 alertDialogBuilder
                         .setMessage("FAQ: \n" +
-                                "How to set goals? \n" +
-                                "The user inputs the goals in the notepad. \n" +
+                                getString(R.string.Q1) + "\n" +
+                                getString(R.string.A1) + "\n" +
                                 "\n" +
-                                "Where is the goal section? \n" +
-                                "The goal section is located in the main screen in the bottom right.  Another way is for the user to click on the set goals button. \n" +
+                                getString(R.string.Q2) +"\n" +
+                                getString(R.string.A2) +"\n" +
                                 "\n" +
-                                "How does the distance travel work? \n" +
-                                "The distance travelled works by it using a formula based on steps. Where the length of a step is 0.74 cm is multiplied with number of steps.  \n" +
+                                getString(R.string.Q3) +"\n" +
+                                getString(R.string.A3) + "\n" +
                                 "\n" +
-                                "Is there a limit on the number of challenges you can set and goals that I can write? \n" +
-                                "There is no limit, you can set as many challenges and write as many goals as you want. \n" +
+                                getString(R.string.Q4) +"\n" +
+                                getString(R.string.A4) +"\n" +
                                 "\n" +
-                                "How do you save multiple notes using the notepad function? \n" +
-                                "The user would click on the save button and that would save it to a file. \n" +
+                                getString(R.string.Q5) +"\n" +
+                                getString(R.string.A5) +"\n" +
                                 "\n" +
-                                "How do I track all of my challenges and goals? \n" +
-                                "It saves the goals to a database and it retrieves the challenges and tasks from the database so that the users can see it. \n" +
-                                "\n" +
-                                "How do I access all the different features of this app? \n" +
-                                "Clicking on the icons that correspond to the different features of this app. ")
+                                getString(R.string.Q6) +"\n" +
+                                getString(R.string.A6))
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -169,10 +156,11 @@ public class Main extends AppCompatActivity implements SensorEventListener {
                 // set dialog message
                 alertDialogBuilder2
                         .setMessage("About Message: \n" +
-                                "Our health and fitness app is designed to help users achieve and maintain a healthy lifestyle. \n" +
-                                " This app will help organize our users through the application. \n" +
-                                " Our app will try and use a simple user interface so that all age groups will find it easy to use. \n" +
-                                " As a result, we are trying to promote healthier life choices. ")
+                                getString(R.string.S1) +"\n" +
+                                getString(R.string.S2) +"\n" +
+                                getString(R.string.S3) +"\n" +
+                                getString(R.string.S4)+"\n\n" +
+                                getString(R.string.S5))
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -186,8 +174,10 @@ public class Main extends AppCompatActivity implements SensorEventListener {
                 // show it
                 alertDialog2.show();
                 break;
+            /*
             case R.id.Setting:
                 break;
+            */
             //Links to a discussion board regarding to health issues
             case R.id.Discussion:
                 Uri url = Uri.parse("https://patient.info/forums");
@@ -242,19 +232,7 @@ public class Main extends AppCompatActivity implements SensorEventListener {
             steps.setText(String.valueOf(Math.round(sensorEvent.values[0])));
             distance.setText(String.valueOf(String.format("%.2f",distanceTraval(sensorEvent.values[0]))));
             calories.setText(String.valueOf(String.format("%.1f",caloriesBurnt(sensorEvent.values[0]))));
-/*
-            //Context.MODE_PRIVATE | Context.MODE_APPEND
-            SharedPreferences pref = getSharedPreferences("Test2", 0);
-            SharedPreferences.Editor editor = pref.edit();
-            editor.clear();
-            displaySteps = steps.getText().toString();
-            String displayDistance = distance.getText().toString();
-            String displayCalories = calories.getText().toString();
-            editor.putString("steps", displaySteps);
-            editor.putString("distance", displayDistance);
-            editor.putString("calories", displayCalories);
-            editor.commit();
-    */
+
             //distance.setText(String.valueOf(distanceTraval(sensorEvent.values[0])));
             //distance.setText(String.valueOf(distanceTraval(step)));
             //step++;

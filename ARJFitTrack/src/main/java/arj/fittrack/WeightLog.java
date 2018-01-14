@@ -1,18 +1,14 @@
 package arj.fittrack;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Bundle;
 //import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,23 +20,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.text.InputType;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.jar.Attributes;
 
 /**
  *  Team Name: ARJ
@@ -54,7 +41,7 @@ public class WeightLog extends AppCompatActivity {
     ListView listView;
     static ArrayList<String> arrayList;
     static ArrayAdapter<String> adapter;
-    TextView showHeight;
+    TextView showHeight, showWeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +50,12 @@ public class WeightLog extends AppCompatActivity {
         databaseRefWeight = FirebaseDatabase.getInstance().getReference("weight");
         databaseRefHeight = FirebaseDatabase.getInstance().getReference("height");
 
+        //Declaring Variables
         String[] weights = {""};
         arrayList = new ArrayList<>(Arrays.asList(weights));
         listView = (ListView) findViewById(R.id.listWeight);
         showHeight = (TextView) findViewById(R.id.displayHeight);
+        showWeight = (TextView) findViewById(R.id.displayWeight);
 
         final ImageButton addWeight = (ImageButton) findViewById(R.id.add);
         addWeight.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +64,7 @@ public class WeightLog extends AppCompatActivity {
                 alertDialog.setTitle("WEIGHT");
                 alertDialog.setMessage("Enter Weight in pounds (LB)");
 
+                //Creates an EditText in the activity inside of the alert dialog
                 final EditText inputWeight = new EditText(WeightLog.this);
                 inputWeight.setId(R.id.inWeight);
                 inputWeight.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
@@ -90,6 +80,7 @@ public class WeightLog extends AppCompatActivity {
                             String weight = inputWeight.getText().toString();
                             if(!TextUtils.isEmpty(weight))
                             {
+                                //Inputting data into the database ID, Current Date, and Weight
                                 String id = databaseRefWeight.push().getKey();
                                 String currentDate = java.text.DateFormat.getDateTimeInstance().format(new Date());
                                 UserWeight userWeight = new UserWeight(id, weight, currentDate);
@@ -99,8 +90,6 @@ public class WeightLog extends AppCompatActivity {
                             else
                             {
                                 Message.message(getApplicationContext(),"Please enter a weight in LB");
-                                //stop the execution
-                                //return;
                             }
                         }
                     });
@@ -138,6 +127,7 @@ public class WeightLog extends AppCompatActivity {
                                 String height = inputHeight.getText().toString();
                                 if(!TextUtils.isEmpty(height))
                                 {
+                                    //Inputs an ID and height enter from user into the database
                                     String id = databaseRefHeight.push().getKey();
                                     UserHeight userHeight = new UserHeight(id, height);
                                     databaseRefHeight.child(id).setValue(userHeight);
@@ -171,9 +161,7 @@ public class WeightLog extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
 
         //Menu (ToolBar)
         switch (item.getItemId()) {
@@ -184,26 +172,23 @@ public class WeightLog extends AppCompatActivity {
                 // set dialog message
                 alertDialogBuilder
                         .setMessage("FAQ: \n" +
-                                "How to set goals? \n" +
-                                "The user inputs the goals in the notepad. \n" +
+                                getString(R.string.Q1) + "\n" +
+                                getString(R.string.A1) + "\n" +
                                 "\n" +
-                                "Where is the goal section? \n" +
-                                "The goal section is located in the main screen in the bottom right.  Another way is for the user to click on the set goals button. \n" +
+                                getString(R.string.Q2) +"\n" +
+                                getString(R.string.A2) +"\n" +
                                 "\n" +
-                                "How does the distance travel work? \n" +
-                                "The distance travelled works by it using a formula based on steps. Where the length of a step is 0.74 cm is multiplied with number of steps.  \n" +
+                                getString(R.string.Q3) +"\n" +
+                                getString(R.string.A3) + "\n" +
                                 "\n" +
-                                "Is there a limit on the number of challenges you can set and goals that I can write? \n" +
-                                "There is no limit, you can set as many challenges and write as many goals as you want. \n" +
+                                getString(R.string.Q4) +"\n" +
+                                getString(R.string.A4) +"\n" +
                                 "\n" +
-                                "How do you save multiple notes using the notepad function? \n" +
-                                "The user would click on the save button and that would save it to a file. \n" +
+                                getString(R.string.Q5) +"\n" +
+                                getString(R.string.A5) +"\n" +
                                 "\n" +
-                                "How do I track all of my challenges and goals? \n" +
-                                "It saves the goals to a database and it retrieves the challenges and tasks from the database so that the users can see it. \n" +
-                                "\n" +
-                                "How do I access all the different features of this app? \n" +
-                                "Clicking on the icons that correspond to the different features of this app. ")
+                                getString(R.string.Q6) +"\n" +
+                                getString(R.string.A6))
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -227,10 +212,11 @@ public class WeightLog extends AppCompatActivity {
                 // set dialog message
                 alertDialogBuilder2
                         .setMessage("About Message: \n" +
-                                "Our health and fitness app is designed to help users achieve and maintain a healthy lifestyle. \n" +
-                                " This app will help organize our users through the application. \n" +
-                                " Our app will try and use a simple user interface so that all age groups will find it easy to use. \n" +
-                                " As a result, we are trying to promote healthier life choices. ")
+                                getString(R.string.S1) +"\n" +
+                                getString(R.string.S2) +"\n" +
+                                getString(R.string.S3) +"\n" +
+                                getString(R.string.S4) +"\n\n" +
+                                getString(R.string.S5))
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -244,8 +230,10 @@ public class WeightLog extends AppCompatActivity {
                 // show it
                 alertDialog2.show();
                 break;
+            /*
             case R.id.Setting:
                 break;
+            */
             //Links to a discussion board regarding to health issues
             case R.id.Discussion:
                 Uri url = Uri.parse("https://patient.info/forums");
@@ -283,11 +271,19 @@ public class WeightLog extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 arrayList.clear();
-
+                //Creates an array list and displays into a ListView of the date and weight
                 for(DataSnapshot dss : dataSnapshot.getChildren()){
                     UserWeight userWeight = dss.getValue(UserWeight.class);
                     arrayList.add(userWeight.getDate() + getString(R.string.tab) + "Your weight: "+ userWeight.getWeight() +" LB");
                 }
+                //Uses a TextView to set the last weight inputted
+                for(DataSnapshot dss : dataSnapshot.getChildren()) {
+                    UserWeight userWeight2 = dss.getValue(UserWeight.class);
+
+                    String weight = userWeight2.getWeight();
+                    showWeight.setText(weight + " LB");
+                }
+                //Displays the data of into a ListView
                 adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
                 listView.setAdapter(adapter);
             }
@@ -319,7 +315,8 @@ public class WeightLog extends AppCompatActivity {
     }
 
 
-    //Function that adds weight when the "Add Button" is pressed. However, the field needs to contain a number otherwise a toast message will display
+   // These were all used for a local database for debugging and testing
+    //The current app now uses Firebase
    /*
     public void addWeight(View view) {
         String weight = Weight.getText().toString();
@@ -346,94 +343,6 @@ public class WeightLog extends AppCompatActivity {
     public void viewdata(View view) {
         String data = helper.getData_Weight();
         Message.message(this,data);
-    }
-
-    //Displays the result from calculate but first if element such as KG and CM is empty then it will say enter them
-    public void calculate(View view){
-        String KG = bWeight.getText().toString();
-        String CM = bHeight.getText().toString();
-
-        if(KG.isEmpty() || CM.isEmpty()){
-            Message.message(getApplicationContext(),"enter a weight and height");
-        }
-
-        float weight = Float.parseFloat(KG);
-        float height = Float.parseFloat(CM) / 100;
-        float bmi = calcualte(weight,height);
-        String bmiresult = bmiResult(bmi);
-        Result.setText(String.valueOf(String.format("%.1f", bmi) + ". \t" + bmiresult));
-    }
-
-    //When calculate button is pressed it calculate the BMI using weight and height
-    private float calcualte(float weight, float height){
-        return (float) (weight/(height * height));
-    }
-    //depending on bmi levels it will output to the user to display their body status
-    private String bmiResult(float bmi){
-        if (bmi < 16){
-            return "You are severely underweight!";
-        }
-        else if(bmi < 18.5){
-            return "You are underweight.";
-        }
-        else if(bmi < 25){
-            return "Your weight is normal.";
-        }
-        else if(bmi < 30){
-            return "You are overweight!";
-        }
-        else{
-            return "You are obese!";
-        }
-    }
-    */
-/*
-    public void update( View view)
-    {
-        String u1 = updateold.getText().toString();
-        String u2 = updatenew.getText().toString();
-        if(u1.isEmpty() || u2.isEmpty())
-        {
-            Message.message(getApplicationContext(),"Enter Data");
-        }
-        else
-        {
-            int a= helper.updateName( u1, u2);
-            if(a<=0)
-            {
-                Message.message(getApplicationContext(),"Unsuccessful");
-                updateold.setText("");
-                updatenew.setText("");
-            } else {
-                Message.message(getApplicationContext(),"Updated");
-                updateold.setText("");
-                updatenew.setText("");
-            }
-        }
-    }
-    */
-    /*
-    //used to delete a weight if user entered wrong weight
-    public void delete(View view)
-    {
-        String uweight = DeleteWeight.getText().toString();
-        if(uweight.isEmpty())
-        {
-            Message.message(getApplicationContext(),"enter existing weight to delete");
-        }
-        else{
-            int i= helper.delete_weight(uweight);
-            if(i <= 0)
-            {
-                Message.message(getApplicationContext(),"cannot delete non-existing weight");
-                DeleteWeight.setText("");
-            }
-            else
-            {
-                Message.message(this, "weight is deleted");
-                DeleteWeight.setText("");
-            }
-        }
     }
     */
 }
