@@ -75,8 +75,8 @@ public class Challenges extends Fragment {
 
 
         //Initialize the DatabaseHelper
-        helper = new myDbAdapter(getActivity().getApplicationContext());
-
+        //helper = new myDbAdapter(getActivity().getApplicationContext());
+        //Initialize the firebase database
         databaseRefChallenges = FirebaseDatabase.getInstance().getReference("challenges");
 
         //This section will be storing the Challenges and Task in a String
