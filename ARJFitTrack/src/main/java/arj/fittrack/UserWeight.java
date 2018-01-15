@@ -4,8 +4,7 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- *  Team Name: ARJ
- *  Adrian Caprini N01115682, Raphael Najera N01104031, Johnson Liang N01129137
+ * Created by John on 2017-12-29.
  */
 
 public class UserWeight {
