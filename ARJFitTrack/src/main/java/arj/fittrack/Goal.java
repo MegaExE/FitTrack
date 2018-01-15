@@ -43,7 +43,6 @@ public class Goal extends Fragment {
     static ArrayList<String> arrayList;
     ArrayList<String> goalidlist;
     static ArrayAdapter<String> adapter;
-    EditText input;
 
     //create an ArrayList object to store selected items
     ArrayList<String> selectedItems;
@@ -105,7 +104,6 @@ public class Goal extends Fragment {
         listView = (ListView) view.findViewById(R.id.listv);
 
         //User's input for adding the Goals
-        input = (EditText) view.findViewById(R.id.editText);
 
         //Create an ArrayList object to store the goals that has been click on the list view
         selectedItems = new ArrayList<String>();
@@ -116,7 +114,7 @@ public class Goal extends Fragment {
         //set OnItemClickListener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                final String selectedItem = ((TextView) view).getText().toString();
+               // final String selectedItem = ((TextView) view).getText().toString();
 
                 //Display a dialog for the user to remove the goal that show that the user completed the goal
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
@@ -165,6 +163,7 @@ public class Goal extends Fragment {
                 //Display the EditText in the dialog box for the user to enter the goal
                 final EditText inputGoal = new EditText(getActivity());
                 inputGoal.setId(R.id.idgoal);
+                inputGoal.setInputType(InputType.TYPE_CLASS_TEXT);
 
                 LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                 inputGoal.setLayoutParams(layoutparams);
@@ -211,27 +210,27 @@ public class Goal extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-    databaseRefGoal.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
+        databaseRefGoal.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-            arrayList.clear();
-            goalidlist.clear();
-            //Retrieve the User's goal and goal id and display it on List of goals
-            for (DataSnapshot goalsnapshot : dataSnapshot.getChildren()) {
-                UserGoal goal = goalsnapshot.getValue(UserGoal.class);
-                arrayList.add(goal.getgoal());
-                goalidlist.add(goal.getgoalID());
+                arrayList.clear();
+                goalidlist.clear();
+                //Retrieve the User's goal and goal id and display it on List of goals
+                for (DataSnapshot goalsnapshot : dataSnapshot.getChildren()) {
+                    UserGoal goal = goalsnapshot.getValue(UserGoal.class);
+                    arrayList.add(goal.getgoal());
+                    goalidlist.add(goal.getgoalID());
+                }
+                adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+                listView.setAdapter(adapter);
             }
-            adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
-            listView.setAdapter(adapter);
-        }
 
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-        }
-    });
+            }
+        });
 
     }
 }
