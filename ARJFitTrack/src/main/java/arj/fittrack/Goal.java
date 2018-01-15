@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  *  Team Name: ARJ
@@ -46,12 +51,12 @@ public class Goal extends Fragment {
     ListView listView;
 
     //Declare Database
-    myDbAdapter helper;
+    //myDbAdapter helper;
 
     //Declared the Context for Dialog
     //final Goal context = this;
 
-    //Firebase
+    // Declare Firebase
     DatabaseReference databaseRefGoal;
 
     int num = 0;
@@ -79,11 +84,10 @@ public class Goal extends Fragment {
         // ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Initialize the DatabaseHelper
-        helper = new myDbAdapter(getActivity().getApplicationContext());
+        //helper = new myDbAdapter(getActivity().getApplicationContext());
 
+        //Initialize the FirebaseDatabase
         databaseRefGoal = FirebaseDatabase.getInstance().getReference("goal");
-
-
 
         //Stores the user's goal
         String[] goals = {""};
@@ -94,27 +98,11 @@ public class Goal extends Fragment {
         //adapter=new ArrayAdapter<String>(this,R.layout.list_item,R.id.txtitem,android.R.layout.simple_list_item_multiple_choice,arrayList);
         //Supply data items to Checkbox Listview
 
-
-        //set multiple selection mode
-        //listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
         //Testing
         //arrayList.add("Test");
 
         //Creates the ListView
         listView = (ListView) view.findViewById(R.id.listv);
-
-
-
-       /* //Gets the user's goals from the database
-        String data = helper.getData_Goals();
-        String[] test = data.split("\n");
-        //Displays the user's goals
-        /*for(String savegoals : test) {
-            arrayList.add(savegoals);
-        }*/
-        // DataSnapshot dataSnapshot;*/
-
 
         //User's input for adding the Goals
         input = (EditText) view.findViewById(R.id.editText);
@@ -129,21 +117,14 @@ public class Goal extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 final String selectedItem = ((TextView) view).getText().toString();
-              /*  if(selectedItems.contains(selectedItem))
-                    selectedItems.remove(selectedItem); //remove deselected item from the list of selected items
-                else
-                    selectedItems.add(selectedItem); //add selected item to the list of selected items*/
 
-                //current position in that the user click on the listview
-                //Message.message(getActivity().getApplicationContext(), String.valueOf(position));
-
-
+                //Display a dialog for the user to remove the goal that show that the user completed the goal
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 // set title
-                alertDialogBuilder.setTitle("Delete");
+                alertDialogBuilder.setTitle(getString(R.string.remove));
                 // set dialog message
                 alertDialogBuilder
-                        .setMessage("Are you sure?")
+                        .setMessage(getString(R.string.completed))
                         .setCancelable(false)
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
@@ -163,16 +144,6 @@ public class Goal extends Fragment {
                                 //Delete the user's goal
                                 drgoal.removeValue();
                                 Message.message(getActivity().getApplicationContext(),"Goal Deleted");
-
-                                /*long i = helper.delete_goals(selectedItem);
-                                if (i <= 0) {
-                                    Message.message(getActivity().getApplicationContext(), "Unable to delete goal");
-
-                                } else {
-                                    Message.message(getActivity().getApplicationContext(), "Goal deleted");
-
-                                }*/
-
                             }
                         });
                 // create alert dialog
@@ -183,109 +154,60 @@ public class Goal extends Fragment {
             }
         });
 
-
-        //This button will set the user's Goals
-        final Button setgoals = (Button) view.findViewById(R.id.setgoal);
-        setgoals.setOnClickListener(new View.OnClickListener() {
+        //Adds the user's goals
+        final ImageButton addGoal = (ImageButton) view.findViewById(R.id.setgoal);
+        addGoal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                alertDialog.setTitle(getString(R.string.Goals));
+                alertDialog.setMessage(getString(R.string.NewGoal));
 
-                TextView tv1;
-                EditText input;
-                input = (EditText) view.findViewById(R.id.editText);
+                //Display the EditText in the dialog box for the user to enter the goal
+                final EditText inputGoal = new EditText(getActivity());
+                inputGoal.setId(R.id.idgoal);
 
-                String goals = input.getText().toString();
+                LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                inputGoal.setLayoutParams(layoutparams);
 
-                //Check if the EditText is empty or not
-                if(goals.isEmpty()){
-                    Message.message(getActivity().getApplicationContext(),"Enter a goal");
-                }else {
+                alertDialog.setView(inputGoal);
 
-                    //Add the user's goal to the array and display the goal in the ListView
-                    arrayList.add(input.getText().toString());
+                //When pressed Add, it will add the Goal to the firebase database and listview
+                alertDialog.setPositiveButton("Add",
+                        new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                                //String weight = inputWeight.getText().toString();
+                                //UserWeight userWeight = new UserWeight(weight);
 
-                    String goal = input.getText().toString();
+                                String goal = inputGoal.getText().toString();
+                                if(!TextUtils.isEmpty(goal))
+                                {
+                                    String id = databaseRefGoal.push().getKey();
+                                    UserGoal userGoal = new UserGoal(id,goal);
+                                    databaseRefGoal.child(id).setValue(userGoal);
+                                    Message.message(getActivity().getApplicationContext(),getString(R.string.Addedgoalmessage));
+                                }
+                                else
+                                {
+                                    Message.message(getActivity().getApplicationContext(),getString(R.string.Entergoal));
+                                    //stop the execution
+                                    return;
+                                }
+                            }
+                        });
+                alertDialog.setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
 
-                    String id = databaseRefGoal.push().getKey();
-                    UserGoal userGoal = new UserGoal(id,goal);
-                    databaseRefGoal.child(id).setValue(userGoal);
-                    Message.message(getActivity().getApplicationContext(),"Goal Added");
-
-
-                    adapter.notifyDataSetChanged();
-                    //Add the user's goal to the database
-                   /* long id = helper.insertData_Goal(goals);
-                    if(id<0)
-                    {
-                        Message.message(getActivity().getApplicationContext(),"Insertion Unsuccessful");
-                        input.setText("");
-
-                    } else
-                    {
-                        Message.message(getActivity().getApplicationContext(),"Insertion Successful");
-                        input.setText("");
-                    }*/
-
-                }
+                alertDialog.show();
             }
         });
-
-
-       /* //This button will delete the user's Goals
-        final Button deletegoal = (Button) view.findViewById(R.id.deletegoal);
-        deletegoal.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                int count = 0;
-
-                String data = helper.getData_Goals();
-                String[] test = data.split("\n");
-                for (String savegoals : test) {
-                    count++;
-                }
-
-                String[] array = new String[count];
-
-                int k = 0;
-                //String goals = null;
-                for (String goals : selectedItems) {
-                    array[k] = goals;
-                    k++;
-                }
-
-
-                // helper.delete_goals(goals); //remove the user's goals from the database
-                //Message.message(getActivity().getApplicationContext(),goals);
-
-                Message.message(getActivity().getApplicationContext(), array[0]);
-              //  Message.message(getActivity().getApplicationContext(), array[1]);
-
-                //Displays the user's goals
-
-
-                    long i = helper.delete_goals(array[0]);
-                    if (i <=0) {
-                        Message.message(getActivity().getApplicationContext(), "Unable to delete goal");
-
-                    } else {
-                        Message.message(getActivity().getApplicationContext(), "Goal deleted");
-
-                    }
-                    // arrayList.remove(goals); //remove the user's goals
-                    /// adapter.notifyDataSetChanged();
-                }
-
-        });*/
         return view;
     }
 
-
-    //Debug
-  /*  public void viewdata(View view)
-    {
-        String data = helper.getData_Goals();
-        Message.message(getActivity().getApplicationContext(),data);
-    }*/
-
+    //Updated the listview and Display the users list of goals from the firebase database
     @Override
     public void onStart() {
         super.onStart();
