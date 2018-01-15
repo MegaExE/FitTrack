@@ -6,11 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     tools:context="arj.fittrack.Main"
-<<<<<<< HEAD
     tools:layout_editor_absoluteY="73dp"
-=======
-    tools:layout_editor_absoluteY="81dp"
->>>>>>> master
     tools:layout_editor_absoluteX="0dp">
 
     <!--
@@ -31,17 +27,12 @@
 
     <TextView
         android:id="@+id/stepcounter"
-<<<<<<< HEAD
         android:layout_width="0dp"
-=======
-        android:layout_width="73dp"
->>>>>>> master
         android:layout_height="0dp"
         android:fontFamily="casual"
         android:text="@string/StepsCounter"
         android:textColor="@color/green"
         android:textSize="24sp"
-<<<<<<< HEAD
         app:layout_constraintRight_toLeftOf="@+id/cals"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
@@ -50,26 +41,11 @@
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/imageView7"
         app:layout_constraintTop_toTopOf="@+id/distance" />
-=======
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/imageView6"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="17dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/count" />
->>>>>>> master
 
     <!-- android:background="@drawable/tab" -->
     <TextView
         android:id="@+id/count"
-<<<<<<< HEAD
         android:layout_width="183dp"
-=======
-        android:layout_width="0dp"
->>>>>>> master
         android:layout_height="0dp"
         android:fontFamily="casual"
         android:text="0"
@@ -77,7 +53,6 @@
         android:textColor="@color/pink"
         android:background="@drawable/tab"
         android:textSize="60sp"
-<<<<<<< HEAD
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintBottom_creator="1"
         android:layout_marginStart="85dp"
@@ -109,42 +84,11 @@
     <TextView
         android:id="@+id/distance"
         android:layout_width="115dp"
-=======
-        app:layout_constraintRight_toLeftOf="@+id/imageView7"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/imageView6"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="2dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintTop_toTopOf="@+id/imageView7"
-        app:layout_constraintLeft_toRightOf="@+id/stepcounter" />
-
-    <ImageView
-        android:layout_width="59dp"
-        android:layout_height="54dp"
-        android:src="@drawable/walkingicon"
-        android:id="@+id/imageView7"
-        app:layout_constraintRight_toLeftOf="@+id/imageView8"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginTop="16dp"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/distance"
-        android:layout_width="0dp"
->>>>>>> master
         android:layout_height="31dp"
         android:fontFamily="casual"
         android:text="@string/Distance"
         android:textColor="@color/green"
         android:textSize="24sp"
-<<<<<<< HEAD
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
@@ -160,21 +104,6 @@
         android:id="@+id/travelled"
         android:layout_width="183dp"
         android:layout_height="70dp"
-=======
-        app:layout_constraintRight_toLeftOf="@+id/imageView6"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/travelled"
-        app:layout_constraintTop_toTopOf="@+id/imageView6" />
-
-    <TextView
-        android:id="@+id/travelled"
-        android:layout_width="0dp"
-        android:layout_height="73dp"
->>>>>>> master
         android:fontFamily="casual"
         android:text="0"
         android:textColor="@color/pink"
@@ -182,7 +111,6 @@
         android:background="@drawable/tab"
         android:gravity="center"
         tools:layout_constraintRight_creator="1"
-<<<<<<< HEAD
         android:layout_marginStart="165dp"
         android:layout_marginEnd="166dp"
         app:layout_constraintRight_toRightOf="parent"
@@ -234,54 +162,12 @@
         android:id="@+id/cals"
         android:layout_width="0dp"
         android:layout_height="68dp"
-=======
-        app:layout_constraintRight_toRightOf="@+id/meter"
-        app:layout_constraintBaseline_toBaselineOf="@+id/meter"
-        tools:layout_constraintBaseline_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/stepcounter" />
-
-    <ImageView
-        android:layout_width="67dp"
-        android:layout_height="60dp"
-        android:src="@drawable/distanceicon"
-        android:id="@+id/imageView6"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/travelled"
-        android:layout_marginStart="33dp"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/count" />
-
-    <TextView
-        android:id="@+id/calsburnt"
-        android:layout_width="187dp"
-        android:layout_height="29dp"
-        android:fontFamily="casual"
-        android:text="@string/Calories"
-        android:textColor="@color/green"
-        android:textSize="24sp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/cals"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="15dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toTopOf="@+id/imageView8"
-        app:layout_constraintLeft_toRightOf="@+id/travelled" />
-
-    <TextView
-        android:id="@+id/cals"
-        android:layout_width="237dp"
-        android:layout_height="73dp"
->>>>>>> master
         android:fontFamily="casual"
         android:text="0"
         android:textColor="@color/pink"
         android:textSize="60sp"
         android:background="@drawable/tab"
         android:gravity="center"
-<<<<<<< HEAD
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         android:layout_marginStart="9dp"
@@ -304,36 +190,12 @@
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="@+id/cals"
         android:layout_marginEnd="58dp" />
-=======
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginEnd="48dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@+id/calories"
-        tools:layout_constraintBaseline_creator="1" />
-
-    <TextView
-        android:id="@+id/calories"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:text="@string/cal"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintRight_toRightOf="@+id/cals"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="67dp"
-        app:layout_constraintLeft_toLeftOf="@+id/imageView8" />
->>>>>>> master
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/caloriesburnticon"
         android:id="@+id/imageView8"
-<<<<<<< HEAD
         app:layout_constraintRight_toLeftOf="@+id/cals"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
@@ -410,37 +272,7 @@
         app:layout_constraintTop_toTopOf="@+id/weight"
         app:layout_constraintLeft_toRightOf="@+id/notepad" />
 
-=======
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/cals"
-        app:layout_constraintRight_toRightOf="@+id/cals"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/count"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="6dp"
-        app:layout_constraintLeft_toRightOf="@+id/calsburnt" />
-
-    <TextView
-        android:id="@+id/meter"
-        android:layout_width="88dp"
-        android:layout_height="0dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintRight_toLeftOf="@+id/cals"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/cals"
-        android:layout_marginEnd="29dp"
-        app:layout_constraintTop_toTopOf="@+id/calories" />
->>>>>>> master
 
 
 </android.support.constraint.ConstraintLayout>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master

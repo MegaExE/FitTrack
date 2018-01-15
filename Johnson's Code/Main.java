@@ -1,64 +1,119 @@
 package arj.fittrack;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.icu.text.DecimalFormat;
+import android.icu.text.NumberFormat;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static arj.fittrack.R.id.count;
+import static arj.fittrack.R.id.travelled;
 /**
  *  Team Name: ARJ
  *  Adrian Caprini N01115682, Raphael Najera N01104031, Johnson Liang N01129137
  */
-public class MenuTab extends AppCompatActivity {
-    //Declared the Context for Dialog
-    final Context context = this;
-    private SectionsPagerAdapter mSectionsPagerAdapter;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
-    private ViewPager mViewPager;
+public class Main extends AppCompatActivity implements SensorEventListener {
+
+    //Declared variables the sensor uses
+    SensorManager sensorManager;
+    Sensor stepCounter;
+    Sensor stepDetector;
+    TextView steps;
+
+    //
+    final Context context = this;
+
+    //TextView for distance travelled
+    TextView distance;
+
+    //TextView for calories burnt
+    TextView calories;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_tab);
+        setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-<<<<<<< HEAD
-        //Add a upbutton to allow the user to go back
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-=======
->>>>>>> master
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        //ImageButton for Weight Activity (dumbbell)
+        final ImageButton weight = (ImageButton) findViewById(R.id.weight);
+        weight.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+                Intent intent = new Intent(Main.this, WeightLog.class);
+                startActivity(intent);
+            }
+        });
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+        //ImageButton for Notepad Activity (notepad)
+        final ImageButton notepad = (ImageButton) findViewById(R.id.notepad);
+        notepad.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
+                Intent intent = new Intent(Main.this, Notepad.class);
+                startActivity(intent);
+            }
+        });
+
+        //Set goals
+        //Open the goals screen
+
+        final ImageButton setgoals = (ImageButton) findViewById(R.id.goal);
+        setgoals.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(Main.this, MenuTab.class);
+
+
+                startActivity(intent);
+            }
+        });
+
+        //Implementing Step Counter
+        steps = (TextView) findViewById(count);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        stepCounter = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        stepDetector = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+
+        //Implementing Distance
+        distance = (TextView) findViewById(R.id.travelled);
+
+        //Implementing Calories Calculator
+        calories = (TextView) findViewById(R.id.cals);
+
+/*
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("steps", steps.getText().toString());
+        editor.putString("distance", distance.getText().toString());
+        editor.putString("calories",calories.getText().toString());
+        editor.commit();
+*/
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,8 +136,7 @@ public class MenuTab extends AppCompatActivity {
                 alertDialogBuilder.setTitle("Help");
                 // set dialog message
                 alertDialogBuilder
-<<<<<<< HEAD
-                        .setMessage("Help Message: \n" +
+                        .setMessage("FAQ: \n" +
                                 "How to set goals? \n" +
                                 "The user inputs the goals in the notepad. \n" +
                                 "\n" +
@@ -103,26 +157,6 @@ public class MenuTab extends AppCompatActivity {
                                 "\n" +
                                 "How do I access all the different features of this app? \n" +
                                 "Clicking on the icons that correspond to the different features of this app. ")
-=======
-                        .setMessage("FAQ: \n" +
-                                getString(R.string.Q1) + "\n" +
-                                getString(R.string.A1) + "\n" +
-                                "\n" +
-                                getString(R.string.Q2) +"\n" +
-                                getString(R.string.A2) +"\n" +
-                                "\n" +
-                                getString(R.string.Q3) +"\n" +
-                                getString(R.string.A3) + "\n" +
-                                "\n" +
-                                getString(R.string.Q4) +"\n" +
-                                getString(R.string.A4) +"\n" +
-                                "\n" +
-                                getString(R.string.Q5) +"\n" +
-                                getString(R.string.A5) +"\n" +
-                                "\n" +
-                                getString(R.string.Q6) +"\n" +
-                                getString(R.string.A6))
->>>>>>> master
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -145,20 +179,11 @@ public class MenuTab extends AppCompatActivity {
                 alertDialogBuilder2.setTitle("About");
                 // set dialog message
                 alertDialogBuilder2
-<<<<<<< HEAD
-                        .setMessage("About Message: \n," +
+                        .setMessage("About Message: \n" +
                                 "Our health and fitness app is designed to help users achieve and maintain a healthy lifestyle. \n" +
                                 " This app will help organize our users through the application. \n" +
                                 " Our app will try and use a simple user interface so that all age groups will find it easy to use. \n" +
                                 " As a result, we are trying to promote healthier life choices. ")
-=======
-                        .setMessage("About Message: \n" +
-                                getString(R.string.S1) +"\n" +
-                                getString(R.string.S2) +"\n" +
-                                getString(R.string.S3) +"\n" +
-                                getString(R.string.S4)+"\n\n" +
-                                getString(R.string.S5))
->>>>>>> master
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -172,15 +197,8 @@ public class MenuTab extends AppCompatActivity {
                 // show it
                 alertDialog2.show();
                 break;
-<<<<<<< HEAD
             case R.id.Setting:
                 break;
-=======
-            /*
-            case R.id.Setting:
-                break;
-            */
->>>>>>> master
             //Links to a discussion board regarding to health issues
             case R.id.Discussion:
                 Uri url = Uri.parse("https://patient.info/forums");
@@ -193,100 +211,87 @@ public class MenuTab extends AppCompatActivity {
                 Intent launch2 = new Intent(Intent.ACTION_VIEW, url2);
                 startActivity(launch2);
                 break;
-
-            /*
-            Need to add these into MenuTab so user can redirect MenuTab to other activities
-            Redirects to the Notepad activity when notepad image is tapped
-            */
-            case R.id.notepad:
-                Intent intentNotepad = new Intent(MenuTab.this, Notepad.class);
-                startActivity(intentNotepad);
-                break;
-
-            //Redirects to Weight activity when weight image is tapped
-            case R.id.weight:
-                Intent intentWeight = new Intent(MenuTab.this, WeightLog.class);
-                startActivity(intentWeight);
-                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    //Implementing SensorEventListener retrieves data from Sensor
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        Sensor sensor = sensorEvent.sensor;
+        float[] values = sensorEvent.values;
+        int value = -1;
 
-        public PlaceholderFragment() {
+        if (values.length > 0) {
+            value = (int) values[0];
+        }
+        if (sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+            steps.setText(String.valueOf(Math.round(sensorEvent.values[0])));
+            distance.setText(String.valueOf(String.format("%.2f",distanceTraval(sensorEvent.values[0]))));
+            calories.setText(String.valueOf(String.format("%.1f",caloriesBurnt(sensorEvent.values[0]))));
+            //distance.setText(String.valueOf(distanceTraval(sensorEvent.values[0])));
+            //distance.setText(String.valueOf(distanceTraval(step)));
+            //step++;
         }
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
+        else if (sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
+            //steps.setText(String.valueOf(Math.round(sensorEvent.values[0])));
+
         }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_menu_tab, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    //Registers the Sensor and get sensor data as fast as possible
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_FASTEST);
+        sensorManager.registerListener(this, stepDetector, SensorManager.SENSOR_DELAY_FASTEST);
+    }
 
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //distance.setText(String.valueOf(distanceTraval(step)));
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
+
+    public float distanceTraval(float steps){
+        //78 cm is the average step length for men while 70cm is for woman. I used 0.74 because it is a median.
+        final float CENTIMETER = 0.74f;
+        final float CONVERSION = 1000f;
+        TextView METER = (TextView) findViewById(R.id.meter);
+        float distanceinM = 0;
+        //float distanceinM = (float) (CENTIMETER * steps);
+        //float distanceinKM = (float) (CENTIMETER * steps) / CONVERSION;
+        if(distanceinM <= 1000)
+        {
+            METER.setText("meters");
+            METER.setTextSize(20);
+            distanceinM = (float) (CENTIMETER * steps);
+            //return distanceinM;
         }
-
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    Goal goals = new Goal();
-                    return goals;
-                case 1:
-                    Challenges challenge = new Challenges();
-                    return challenge;
-            }
-            return null;
+        if (distanceinM >= 1000)
+        {
+            METER.setText("kilometers");
+            METER.setTextSize(15);
+            distanceinM = (float) (CENTIMETER * steps) / CONVERSION;
+            //return distanceinM;
+            //return distanceinKM;
         }
+        return distanceinM;
+    }
 
-
-        @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return 2;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "Goals";
-                case 1:
-                    return "Challenge";
-            }
-            return null;
-        }
+    public float caloriesBurnt(float steps){
+        //A person burns 0.05 calories per step; rough estimate
+        final float CALORIES_PER_STEP = 0.05f;
+        float caloriesBurnt = (float) (CALORIES_PER_STEP * steps);
+        return caloriesBurnt;
     }
 }
+

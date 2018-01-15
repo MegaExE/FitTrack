@@ -2,13 +2,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+<<<<<<< HEAD
 
+=======
+<!--
+>>>>>>> master
     <item
         style="@style/AppTheme"
         android:id="@+id/Setting"
         android:title="@string/Setting"
         app:showAsAction="never"
         android:orderInCategory="4"></item>
+<<<<<<< HEAD
     <item
         style="@style/AppTheme"
         android:id="@+id/Help"
@@ -19,10 +24,26 @@
         style="@style/AppTheme"
         android:id="@+id/About"
         android:title="@string/About"
+=======
+-->
+
+    <item
+        style="@style/AppTheme"
+        android:id="@+id/Discussion"
+        android:title="@string/Discussion"
+        app:showAsAction="never"
+        android:orderInCategory="1"></item>
+
+    <item
+        style="@style/AppTheme"
+        android:id="@+id/News"
+        android:title="@string/News"
+>>>>>>> master
         app:showAsAction="never"
         android:orderInCategory="2"></item>
     <item
         style="@style/AppTheme"
+<<<<<<< HEAD
         android:id="@+id/News"
         android:title="@string/News"
         app:showAsAction="never"
@@ -39,6 +60,18 @@
         android:title="@string/Saves"
         app:showAsAction="never"
         android:orderInCategory="5"></item>
+=======
+        android:id="@+id/Help"
+        android:title="@string/Help"
+        app:showAsAction="never"
+        android:orderInCategory="3"></item>
+    <item
+        style="@style/AppTheme"
+        android:id="@+id/About"
+        android:title="@string/About"
+        app:showAsAction="never"
+        android:orderInCategory="4"></item>
+>>>>>>> master
 
     <item
         style="@style/AppTheme"

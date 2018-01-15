@@ -124,15 +124,40 @@ public class Notepad  extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         //Menu (ToolBar)
+<<<<<<< HEAD
         switch (item.getItemId())
         {
+=======
+        switch (item.getItemId()) {
+>>>>>>> master
             case R.id.Help:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 // set title
                 alertDialogBuilder.setTitle("Help");
                 // set dialog message
                 alertDialogBuilder
+<<<<<<< HEAD
                         .setMessage("Help Message:")
+=======
+                        .setMessage("FAQ: \n" +
+                                getString(R.string.Q1) + "\n" +
+                                getString(R.string.A1) + "\n" +
+                                "\n" +
+                                getString(R.string.Q2) +"\n" +
+                                getString(R.string.A2) +"\n" +
+                                "\n" +
+                                getString(R.string.Q3) +"\n" +
+                                getString(R.string.A3) + "\n" +
+                                "\n" +
+                                getString(R.string.Q4) +"\n" +
+                                getString(R.string.A4) +"\n" +
+                                "\n" +
+                                getString(R.string.Q5) +"\n" +
+                                getString(R.string.A5) +"\n" +
+                                "\n" +
+                                getString(R.string.Q6) +"\n" +
+                                getString(R.string.A6))
+>>>>>>> master
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -155,7 +180,16 @@ public class Notepad  extends AppCompatActivity {
                 alertDialogBuilder2.setTitle("About");
                 // set dialog message
                 alertDialogBuilder2
+<<<<<<< HEAD
                         .setMessage("About Message:")
+=======
+                        .setMessage("About Message: \n" +
+                                getString(R.string.S1) +"\n" +
+                                getString(R.string.S2) +"\n" +
+                                getString(R.string.S3) +"\n" +
+                                getString(R.string.S4)+"\n\n" +
+                                getString(R.string.S5))
+>>>>>>> master
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -169,24 +203,51 @@ public class Notepad  extends AppCompatActivity {
                 // show it
                 alertDialog2.show();
                 break;
+<<<<<<< HEAD
             case R.id.Setting:
                 break;
+=======
+            /*
+            case R.id.Setting:
+                break;
+            */
+>>>>>>> master
             //Links to a discussion board regarding to health issues
             case R.id.Discussion:
                 Uri url = Uri.parse("https://patient.info/forums");
                 Intent launch = new Intent(Intent.ACTION_VIEW, url);
                 startActivity(launch);
                 break;
+<<<<<<< HEAD
             //Redirects to reddit
+=======
+            //Redirects to CBC News
+>>>>>>> master
             case R.id.News:
                 Uri url2 = Uri.parse("http://www.cbc.ca/news/health");
                 Intent launch2 = new Intent(Intent.ACTION_VIEW, url2);
                 startActivity(launch2);
                 break;
+<<<<<<< HEAD
             case R.id.Notes:
                 Intent myIntent = new Intent(Notepad.this, NoteSelect.class);
                 Notepad.this.startActivity(myIntent);
                 break;
+=======
+
+            //Redirects to WeightLog activity
+            case R.id.weight:
+                Intent intentWeight = new Intent(Notepad.this, WeightLog.class);
+                startActivity(intentWeight);
+                break;
+
+            //Redirects to Goal activity when goal image is tapped
+            case R.id.goal:
+                Intent intentGoal = new Intent(Notepad.this, MenuTab.class);
+                startActivity(intentGoal);
+                break;
+
+>>>>>>> master
         }
 
         return super.onOptionsItemSelected(item);

@@ -1,9 +1,13 @@
 package arj.fittrack;
 
 
+<<<<<<< HEAD
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+=======
+import android.os.Bundle;
+>>>>>>> master
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,12 +18,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+=======
+>>>>>>> master
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -35,19 +42,25 @@ public class Challenges extends Fragment {
     //Declare Arraylist
     ArrayList<String> selectedItems;
     static ArrayList<String> arrayList;
+<<<<<<< HEAD
     static ArrayAdapter<String> adapter;
 
 
     ListView chl;
+=======
+>>>>>>> master
 
     //Declare Database
     myDbAdapter helper;
 
+<<<<<<< HEAD
     //Firebase
     DatabaseReference databaseRefChallenges;
 
 
 
+=======
+>>>>>>> master
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -61,10 +74,13 @@ public class Challenges extends Fragment {
             getActivity().setTheme(R.style.AppTheme_Dark_NoActionBar);
         }*/
 
+<<<<<<< HEAD
         final SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getActivity());
         final SharedPreferences.Editor editor =sharedPreferences.edit();
 
+=======
+>>>>>>> master
         super.onCreate(savedInstanceState);
         //getActivity().setContentView(R.layout.challenges);
         //Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
@@ -75,6 +91,7 @@ public class Challenges extends Fragment {
 
 
         //Initialize the DatabaseHelper
+<<<<<<< HEAD
         helper = new myDbAdapter(getActivity().getApplicationContext());
 
         databaseRefChallenges = FirebaseDatabase.getInstance().getReference("challenges");
@@ -87,10 +104,22 @@ public class Challenges extends Fragment {
 
         //Create an instance of ListView
         chl=(ListView) view.findViewById(R.id.checkable_list);
+=======
+        helper = new myDbAdapter((getActivity().getApplicationContext()));
+
+
+        //create an ArrayList object to store selected items
+        selectedItems = new ArrayList<String>();
+
+
+        //Create an instance of ListView
+        ListView chl=(ListView) view.findViewById(R.id.checkable_list);
+>>>>>>> master
         //Set multiple selection mode
         chl.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
 
+<<<<<<< HEAD
         //create an ArrayList object to store selected items
         selectedItems = new ArrayList<String>();
 
@@ -137,6 +166,31 @@ public class Challenges extends Fragment {
 
        // chl.setChe
 
+=======
+
+
+        //This section will be storing the Challenges and Task in a String
+        String[] items={" "};
+
+        //Create an ArrayList object to store the challenges and tasks
+        arrayList = new ArrayList<>(Arrays.asList(items));
+
+        //Gets the user's goals from the database
+        String data = helper.getData_Challenges();
+        String[] test = data.split("\n");
+        //Displays challenges
+        for(String challenges : test) {
+            arrayList.add(challenges);
+        }
+
+        //supply data items to Checkbox ListView
+        //ArrayAdapter<String> aa=new ArrayAdapter<String>(this,R.layout.checkablelist,R.id.txt_title,items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>((getActivity().getApplicationContext()), android.R.layout.simple_list_item_multiple_choice, arrayList);
+
+        chl.setAdapter(adapter);
+
+
+>>>>>>> master
         //set OnItemClickListener
         chl.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -144,6 +198,7 @@ public class Challenges extends Fragment {
                 //TextView textview=((LinearLayout)view).findViewById(R.id.txt_title);
 
                 String selectedItem = ((TextView) view).getText().toString();
+<<<<<<< HEAD
                 if (selectedItems.contains(selectedItem)){
                     selectedItems.remove(selectedItem); //remove deselected item from the list of selected items
                 //editor.putBoolean(Integer.toString(position), false);
@@ -165,6 +220,13 @@ public class Challenges extends Fragment {
 
                 }
 
+=======
+                if(selectedItems.contains(selectedItem))
+                    selectedItems.remove(selectedItem); //remove deselected item from the list of selected items
+                else
+                    selectedItems.add(selectedItem); //add selected item to the list of selected items
+
+>>>>>>> master
             }
 
         });
@@ -175,6 +237,7 @@ public class Challenges extends Fragment {
     }
 
 
+<<<<<<< HEAD
     @Override
     public void onStart() {
         super.onStart();
@@ -202,6 +265,8 @@ public class Challenges extends Fragment {
 
     }
 
+=======
+>>>>>>> master
 /*
     public void onStart(){
         super.onStart();
@@ -226,7 +291,10 @@ public class Challenges extends Fragment {
     }
 */
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> master
 }

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
+=======
+    <color name="white">#ffffff</color>
+>>>>>>> master
     <color name="colorPrimary">#006905</color>
     <color name="colorPrimaryDark">#007104</color>
     <color name="colorAccent">#FF4081</color>

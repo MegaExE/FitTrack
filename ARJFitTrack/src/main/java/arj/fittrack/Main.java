@@ -1,5 +1,9 @@
 package arj.fittrack;
 
+<<<<<<< HEAD
+=======
+import android.Manifest;
+>>>>>>> master
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,8 +12,19 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+<<<<<<< HEAD
 import android.net.Uri;
 import android.os.Bundle;
+=======
+import android.icu.text.DecimalFormat;
+import android.icu.text.NumberFormat;
+import android.net.Uri;
+import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+>>>>>>> master
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -18,6 +33,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import static arj.fittrack.R.id.count;
+<<<<<<< HEAD
+=======
+import static arj.fittrack.R.id.disableHome;
+import static arj.fittrack.R.id.travelled;
+>>>>>>> master
 /**
  *  Team Name: ARJ
  *  Adrian Caprini N01115682, Raphael Najera N01104031, Johnson Liang N01129137
@@ -59,6 +79,7 @@ public class Main extends AppCompatActivity implements SensorEventListener {
 
         //Implementing Calories Calculator
         calories = (TextView) findViewById(R.id.cals);
+<<<<<<< HEAD
 /*
         SharedPreferences pref = getSharedPreferences("StoredData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -67,6 +88,10 @@ public class Main extends AppCompatActivity implements SensorEventListener {
         editor.putString("steps", displaySteps);
         editor.commit();
 */
+=======
+
+        //SharedPreference was used to set the text after saving
+>>>>>>> master
         SharedPreferences preferences = getSharedPreferences("Test3", Context.MODE_PRIVATE);
         String getSteps = preferences.getString("steps", steps.getText().toString());
         String getDistance = preferences.getString("distance", distance.getText().toString());
@@ -79,8 +104,12 @@ public class Main extends AppCompatActivity implements SensorEventListener {
     protected void onPause(){
         super.onPause();
 
+<<<<<<< HEAD
         //int nsteps = Integer.parseInt(String.valueOf(displaySteps));
 
+=======
+        //SharedPreference was used to save the strings of steps, distance, and calories
+>>>>>>> master
         SharedPreferences pref = getSharedPreferences("Test3", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.clear();
@@ -94,6 +123,7 @@ public class Main extends AppCompatActivity implements SensorEventListener {
 
     }
 
+<<<<<<< HEAD
     //handle Android Back Key on Main Screen, and confirm user wants to exit the app.
     @Override
     public void onBackPressed(){
@@ -125,6 +155,8 @@ public class Main extends AppCompatActivity implements SensorEventListener {
         alertDialog.show();
     }
 
+=======
+>>>>>>> master
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -135,9 +167,12 @@ public class Main extends AppCompatActivity implements SensorEventListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+<<<<<<< HEAD
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+=======
+>>>>>>> master
 
         //Menu (ToolBar)
         switch (item.getItemId()) {
@@ -148,6 +183,7 @@ public class Main extends AppCompatActivity implements SensorEventListener {
                 // set dialog message
                 alertDialogBuilder
                         .setMessage("FAQ: \n" +
+<<<<<<< HEAD
                                 "How to set goals? \n" +
                                 "The user inputs the goals in the notepad. \n" +
                                 "\n" +
@@ -168,6 +204,25 @@ public class Main extends AppCompatActivity implements SensorEventListener {
                                 "\n" +
                                 "How do I access all the different features of this app? \n" +
                                 "Clicking on the icons that correspond to the different features of this app. ")
+=======
+                                getString(R.string.Q1) + "\n" +
+                                getString(R.string.A1) + "\n" +
+                                "\n" +
+                                getString(R.string.Q2) +"\n" +
+                                getString(R.string.A2) +"\n" +
+                                "\n" +
+                                getString(R.string.Q3) +"\n" +
+                                getString(R.string.A3) + "\n" +
+                                "\n" +
+                                getString(R.string.Q4) +"\n" +
+                                getString(R.string.A4) +"\n" +
+                                "\n" +
+                                getString(R.string.Q5) +"\n" +
+                                getString(R.string.A5) +"\n" +
+                                "\n" +
+                                getString(R.string.Q6) +"\n" +
+                                getString(R.string.A6))
+>>>>>>> master
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -191,10 +246,18 @@ public class Main extends AppCompatActivity implements SensorEventListener {
                 // set dialog message
                 alertDialogBuilder2
                         .setMessage("About Message: \n" +
+<<<<<<< HEAD
                                 "Our health and fitness app is designed to help users achieve and maintain a healthy lifestyle. \n" +
                                 " This app will help organize our users through the application. \n" +
                                 " Our app will try and use a simple user interface so that all age groups will find it easy to use. \n" +
                                 " As a result, we are trying to promote healthier life choices. ")
+=======
+                                getString(R.string.S1) +"\n" +
+                                getString(R.string.S2) +"\n" +
+                                getString(R.string.S3) +"\n" +
+                                getString(R.string.S4)+"\n\n" +
+                                getString(R.string.S5))
+>>>>>>> master
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -208,8 +271,15 @@ public class Main extends AppCompatActivity implements SensorEventListener {
                 // show it
                 alertDialog2.show();
                 break;
+<<<<<<< HEAD
             case R.id.Setting:
                 break;
+=======
+            /*
+            case R.id.Setting:
+                break;
+            */
+>>>>>>> master
             //Links to a discussion board regarding to health issues
             case R.id.Discussion:
                 Uri url = Uri.parse("https://patient.info/forums");
@@ -264,6 +334,7 @@ public class Main extends AppCompatActivity implements SensorEventListener {
             steps.setText(String.valueOf(Math.round(sensorEvent.values[0])));
             distance.setText(String.valueOf(String.format("%.2f",distanceTraval(sensorEvent.values[0]))));
             calories.setText(String.valueOf(String.format("%.1f",caloriesBurnt(sensorEvent.values[0]))));
+<<<<<<< HEAD
 /*
             //Context.MODE_PRIVATE | Context.MODE_APPEND
             SharedPreferences pref = getSharedPreferences("Test2", 0);
@@ -277,6 +348,9 @@ public class Main extends AppCompatActivity implements SensorEventListener {
             editor.putString("calories", displayCalories);
             editor.commit();
     */
+=======
+
+>>>>>>> master
             //distance.setText(String.valueOf(distanceTraval(sensorEvent.values[0])));
             //distance.setText(String.valueOf(distanceTraval(step)));
             //step++;
