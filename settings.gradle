@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-include ':ARJFitTrack'
-=======
-include ':ARJFitTrack', ':app', ':RetrieveDataWebSolution'
->>>>>>> master
