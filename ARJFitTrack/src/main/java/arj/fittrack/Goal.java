@@ -105,7 +105,7 @@ public class Goal extends Fragment {
         listView = (ListView) view.findViewById(R.id.listv);
 
         //User's input for adding the Goals
-        input = (EditText) view.findViewById(R.id.editText);
+       // input = (EditText) view.findViewById(R.id.editText);
 
         //Create an ArrayList object to store the goals that has been click on the list view
         selectedItems = new ArrayList<String>();
