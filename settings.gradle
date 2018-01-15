@@ -1,1 +1,1 @@
-include ':ARJFitTrack', ':app', ':RetrieveDataWebSolution'
+include ':ARJFitTrack'

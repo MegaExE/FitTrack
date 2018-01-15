@@ -48,7 +48,8 @@
         <activity
             android:name=".MenuTab"
             android:label="@string/title_activity_menu_tab"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Main"></activity>
 
         <!--
         <uses-permission
