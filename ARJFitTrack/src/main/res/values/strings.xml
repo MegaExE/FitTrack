@@ -19,12 +19,7 @@
     <string name="Option">Option</string>
     <string name="StepsCounter">Steps</string>
     <string name="Distance">Distance</string>
-    <string name="Goals">Goals</string>
-    <string name="Setgoals">Set Goals</string>
-    <string name="goalslog">Goals Log</string>
-    <string name="NewGoal">Add a new Goal</string>
-    <string name="Deletegoals">Delete Goals</string>
-    <string name="listgoal">List of Goals:</string>
+
     <string name="NotePad">NotePad</string>
     <string name="Weight">Weight</string>
     <string name="Calories">Calories Burnt</string>
@@ -38,10 +33,24 @@
     <string name="progressButton">Check Progress</string>
     <string name="saveButton">Save</string>
     <string name="bmi">BMI Calculator (Body Mass Index)</string>
+
+
+
     <!-- Sensors -->
     <string name="UVIndex">UV Index</string>
     <string name="Thermalarray">Thermal Array</string>
     <string name="Info">Info</string>
+
+    <!-- strings for Goals -->
+    <string name="Goals">Goals</string>
+    <string name="Setgoals">Set Goals</string>
+    <string name="NewGoal">Add a new Goal</string>
+    <string name="Deletegoals">Delete Goals</string>
+    <string name="listgoal">List of Goals:</string>
+    <string name="Addedgoalmessage">Goal added</string>
+    <string name="Entergoal">Please enter a goal</string>
+    <string name="remove">Remove Goal</string>
+    <string name="completed">Goal completed? </string>
 
 
     <!-- strings for Challenges -->
