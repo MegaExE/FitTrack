@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="66dp"
             android:text="@string/Deletegoals"
-            app:layout_constraintBaseline_toBaselineOf="@+id/setgoal"
+            app:layout_constraintBaseline_toBaselineOf="@+id/goal"
             app:layout_constraintRight_toRightOf="parent"
             tools:layout_constraintBaseline_creator="1"
             tools:layout_constraintRight_creator="1" />
@@ -37,7 +37,7 @@
             android:layout_marginLeft="32dp" />
 
         <Button
-            android:id="@+id/setgoal"
+            android:id="@+id/goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Setgoals"
