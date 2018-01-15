@@ -2,5 +2,6 @@
 <resources>
     <!-- id.xml needed to defined EditText ID in WeightLog -->
     <item type="id" name="inWeight" />
+    <item type="id" name="inHeight"/>
     <item type="id" name="idgoal"/>
 </resources>
