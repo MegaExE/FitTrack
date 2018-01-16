@@ -69,7 +69,7 @@
     <ImageView
         android:layout_width="59dp"
         android:layout_height="54dp"
-        android:src="@drawable/walkingicon"
+        android:src="@mipmap/walkingicon"
         android:id="@+id/imageView7"
         app:layout_constraintRight_toLeftOf="@+id/imageView8"
         tools:layout_constraintTop_creator="1"
@@ -116,7 +116,7 @@
     <ImageView
         android:layout_width="67dp"
         android:layout_height="60dp"
-        android:src="@drawable/distanceicon"
+        android:src="@mipmap/distanceicon"
         android:id="@+id/imageView6"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/travelled"
@@ -177,7 +177,7 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/caloriesburnticon"
+        android:src="@mipmap/caloriesburnticon"
         android:id="@+id/imageView8"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"

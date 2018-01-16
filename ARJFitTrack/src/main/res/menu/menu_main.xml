@@ -41,21 +41,21 @@
         style="@style/AppTheme"
         android:id="@+id/notepad"
         android:title="@string/NotePad"
-        android:icon="@drawable/notepadicon"
+        android:icon="@mipmap/notepadicon"
         app:showAsAction="always"></item>
 
     <item
         style="@style/AppTheme"
         android:id="@+id/goal"
         android:title="@string/Goals"
-        android:icon="@drawable/goalicon"
+        android:icon="@mipmap/goalicon"
         app:showAsAction="always"></item>
 
     <item
         style="@style/AppTheme"
         android:id="@+id/weight"
         android:title="@string/Weight"
-        android:icon="@drawable/weighticon"
+        android:icon="@mipmap/weighticon"
         app:showAsAction="always"></item>
 
 

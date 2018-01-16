@@ -30,7 +30,7 @@
         android:layout_width="88dp"
         android:layout_height="87dp"
         android:layout_marginTop="9dp"
-        android:background="@drawable/redaddicon"
+        android:background="@mipmap/addheighticon"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/add"
         app:layout_constraintRight_toRightOf="@+id/add"

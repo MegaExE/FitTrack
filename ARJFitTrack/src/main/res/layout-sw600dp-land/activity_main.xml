@@ -69,9 +69,9 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:layout_width="59dp"
-        android:layout_height="54dp"
-        android:src="@drawable/walkingicon"
+        android:layout_width="97dp"
+        android:layout_height="118dp"
+        android:src="@mipmap/walkingicon"
         android:id="@+id/imageView7"
         app:layout_constraintRight_toLeftOf="@+id/imageView8"
         tools:layout_constraintTop_creator="1"
@@ -79,7 +79,8 @@
         android:layout_marginTop="16dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.491" />
 
     <TextView
         android:id="@+id/distance"
@@ -96,7 +97,9 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/travelled"
-        app:layout_constraintTop_toTopOf="@+id/imageView6" />
+        app:layout_constraintTop_toTopOf="@+id/imageView6"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.77" />
 
     <TextView
         android:id="@+id/travelled"
@@ -116,15 +119,18 @@
         app:layout_constraintLeft_toLeftOf="@+id/stepcounter" />
 
     <ImageView
-        android:layout_width="67dp"
-        android:layout_height="60dp"
-        android:src="@drawable/distanceicon"
+        android:layout_width="98dp"
+        android:layout_height="92dp"
+        android:src="@mipmap/distanceicon"
         android:id="@+id/imageView6"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/travelled"
         android:layout_marginStart="33dp"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/count" />
+        app:layout_constraintLeft_toLeftOf="@+id/count"
+        tools:layout_editor_absoluteY="231dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginBottom="0dp" />
 
     <TextView
         android:id="@+id/calsburnt"
@@ -180,9 +186,9 @@
         app:layout_constraintLeft_toLeftOf="@+id/imageView8" />
 
     <ImageView
-        android:layout_width="57dp"
-        android:layout_height="79dp"
-        android:src="@drawable/caloriesburnticon"
+        android:layout_width="81dp"
+        android:layout_height="101dp"
+        android:src="@mipmap/caloriesburnticon"
         android:id="@+id/imageView8"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
@@ -196,7 +202,7 @@
         app:layout_constraintLeft_toRightOf="@+id/calsburnt"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteY="238dp" />
+        tools:layout_editor_absoluteY="216dp" />
 
     <TextView
         android:id="@+id/meter"
