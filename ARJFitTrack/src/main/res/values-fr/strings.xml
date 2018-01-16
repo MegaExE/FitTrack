@@ -1,51 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">FitTrack</string>
-    <string name="teamname">Équipe ARJ Presents</string>
-    <!-- Goals -->
+<?xml version="1.0"?>
+
+-<resources>
+
+<string name="step_counter">android.hardware.sensor.stepcounter</string>
+<string name="step_detector">android.hardware.sensor.stepdetector</string>
+<string name="tab">\u0009\u0009\u0009\u0009</string>
+
+<!-- strings for Toolbar -->
+<string name="Discussion">Discussions</string>
+<string name="News">Nouvelles</string>
+<string name="Setting">Réglage</string>
+<string name="Help">Au secours</string>
+<string name="About">Environ</string>
+
+<!-- strings for FAQ -->
+    <string name="Q1">Comment fonctionne le compteur de pas? </string>
+    <string name="A1">Un compteur s'incrémentera en tant qu'utilisateur. </string>
+    <string name="Q2">Comment fonctionnent les déplacements à distance et les calories brûlées?</string>
+    <string name="A2">These two functions work based on a formula and is dependent on a users steps. </string>
+    <string name="Q3">Ces deux fonctions fonctionnent sur la base d'une formule et dépendent des étapes d'un utilisateur.</string>
+    <string name="A3">Il n'y a pas de limite, vous pouvez définir autant de buts que vous le souhaitez.</string>
+    <string name="Q4">Quoi et où sont ces défis?</string>
+    <string name="A4">Challeneges arLes défis sont mis à jour chaque semaine par les développeurs pour que les utilisateurs puissent les compléter. Ils sont tous générés à partir d'une base de données en ligne.e updated weekly by the developers for users to complete. They are all generated from an online database.</string>
+    <string name="Q5">Quelle version ai-je de FitTrack? </string>
+    <string name="A5">La version est montrée dans la section About.</string>
+    <string name="Q6">Comment puis-je accéder à toutes les différentes fonctionnalités de cette application?</string>
+    <string name="A6">En cliquant sur les icônes qui correspondent aux différentes fonctionnalités de cette application.</string>
+
+    <!-- strings for About -->
+    <string name="S1">FitTrack a été conçu pour aider les utilisateurs à atteindre et maintenir un style de vie sain.</string>
+    <string name="S2">Cette application aidera les utilisateurs à organiser leur forme physique et la vie quotidienne.</string>
+    <string name="S3">Notre application a tenté de garder l'interface aussi simple que possible afin que tous les groupes d'âge la trouvent facile à utiliser.</string>
+    <string name="S4">Le but de notre application est d'essayer de promouvoir des choix de vie plus sains.</string>
+    <string name="S5">Version 1.0</string>
+
+<!-- strings for Main -->
+<string name="app_name">FitTrack</string>
+<string name="StepsCounter">pas</string>
+<string name="Distance">Distance</string>
+<string name="NotePad">bloc-notes</string>
+<string name="Weight">poids</string>
+<string name="Calories">calories brûlées</string>
+<string name="cal">cals</string>
+
+
+<!-- strings for weight -->
+<string name="latestHeight">Ton poids: </string>
+<string name="latestWeight">dernier poids ici:</string>
+<string name="enterWeight">Entrer le poids en livres (LB)</string>
+<string name="enterHeight">Entrer la hauteur en centimètre (CM)</string>
+
+<!-- Sensors -->
+<string name="UVIndex">L'indice UV</string>
+<string name="Thermalarray">Réseau thermique</string>
+<string name="Info">Info</string>
+
+
+<!-- strings for Goals -->
     <string name="Goals">Buts</string>
-    <string name="Deletegoals">Supprimer les objectifs</string>
-    <string name="listgoal">Liste des objectifs:</string>
-    <string name="NewGoal">Ajouter un nouvel objectif</string>
     <string name="Setgoals">Fixer des objectifs</string>
-    <string name="goalslog">Objectifs Log</string>
-
-    <!-- Main menu -->
-    <string name="About">Sur</string>
-    <string name="StepsCounter">Pas</string>
-    <string name="Distance">Distance</string>
-    <string name="Calories">Calories Brûlées</string>
-    <string name="cal">cals</string>
-    <string name="Discussion">Discussions</string>
-    <string name="Help">Aidez-moi</string>
-    <string name="Option">Option</string>
-    <string name="Setting">Réglage</string>
-    <string name="News">Nouvelles</string>
-
-    <!-- Weight -->
-    <string name="currentWeight">Entrer le poids</string>
-    <string name="FinalWeight">Poids Final</string>
-    <string name="latestWeight">Dernier poids</string>
-    <string name="progressButton">Vérifier les progrès</string>
-    <string name="saveButton">Sauvegarder</string>
-    <string name="Weight">Poids</string>
-    <string name="Weightlog">Journal de poids</string>
-    <string name="bmi">Calculateur d\'IMC</string>
-
-    <!-- Notepad -->
-    <string name="NotePad">Bloc-notes</string>
-    <string name="Saves">Notes enregistrées</string>
+    <string name="NewGoal">ajouter un nouvel objectif</string>
+    <string name="Deletegoals">supprimer des objectifs</string>
+    <string name="listgoal">liste d'objectifs:</string>
+    <string name="Addedgoalmessage">Objectif ajouté</string>
+    <string name="Entergoal">S'il vous plaît entrer un objectif</string>
+    <string name="remove">Supprimer le but</string>
+    <string name="completed">Objectif complété? </string>
 
 
-    <!-- Challenges -->
-    <string name="ChallengeList">Liste des défis</string>
-    <string name="Challenge">Défi</string>
+<!-- strings for Challenges -->
+<string name="ChallengeList">Liste des défis:</string>
+<string name="Challenge">Défi</string>
 
-    <!--Sensor -->
-    <string name="step_counter">android.hardware.sensor.stepcounter</string>
-    <string name="step_detector">android.hardware.sensor.stepdetector</string>
+<!-- strings for Notes -->
+<string name="Saves">Notes enregistrées</string>
+<string name="title_activity_menu_tab">FitTrack</string>
+<string name="action_settings">Paramètres</string>
+<string name="section_format">Bonjour le monde de la section: %1$d</string>
 
-    <string name="Thermalarray">Réseau thermique</string>
-    <string name="UVIndex">L\'indice UV</string>
-    <string name="Info">Info</string>
 </resources>
