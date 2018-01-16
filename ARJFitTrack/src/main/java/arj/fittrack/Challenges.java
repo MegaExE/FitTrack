@@ -124,11 +124,11 @@ public class Challenges extends Fragment {
                 //Adds checkbox to the listview
                 adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
                 chl.setAdapter(adapter);
-                chl.setItemChecked(0,true);
+               // chl.setItemChecked(0,true);
 
                 //Load the sharedPreferences to remember the challenges/task that the user checked to show that the user's compleleted the challenges/tasks
                 for(int i = 0; i < chl.getCount(); i++){
-                    chl.setItemChecked(i,sharedPreferences.getBoolean(Integer.toString(i),false));
+                   // chl.setItemChecked(i,sharedPreferences.getBoolean(Integer.toString(i),false));
                     if(sharedPreferences.getBoolean(Integer.toString(i),false)){
                         chl.setItemChecked(i,true);
                     }
