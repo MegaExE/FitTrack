@@ -6,7 +6,7 @@
     <!-- strings for Toolbar -->
     <string name="Discussion">Discussions</string>
     <string name="News">News</string>
-    <!--<string name="Setting">Setting</string>-->
+    <string name="Setting">Setting</string>
     <string name="Help">Help</string>
     <string name="About">About</string>
 
@@ -18,7 +18,7 @@
     <string name="Q3">Is there a limit on the number of goals that I can write?</string>
     <string name="A3">There is no limit you can set as many goals as you want.</string>
     <string name="Q4">What and where are these challenges?</string>
-    <string name="A4">Challeneges are updated weekly by the developers for users to complete. They are all generated from an online database.</string>
+    <string name="A4">Challenges are updated weekly by the developers for users to complete. They are all generated from an online database.</string>
     <string name="Q5">What version do I have of FitTrack? </string>
     <string name="A5">The version is shown inside of the About section.</string>
     <string name="Q6">How do I access all the different features of this app?</string>
@@ -27,7 +27,7 @@
     <!-- strings for About -->
     <string name="S1">FitTrack was designed to help users achieve and maintain a healthy lifestyle.</string>
     <string name="S2">This app will help users organize their fitness and day to day life.</string>
-    <string name="S3">Our app attempted to keep the interface as simple as possile so that all age groups will find it easy to use.</string>
+    <string name="S3">Our app attempted to keep the interface as simple as possible so that all age groups will find it easy to use.</string>
     <string name="S4">The purpose of our application is trying to promote healthier life choices.</string>
     <string name="S5">Version 1.0</string>
 
