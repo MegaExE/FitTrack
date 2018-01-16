@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -28,7 +26,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 /**
  *  Team Name: ARJ
@@ -63,11 +60,13 @@ public class Goal extends Fragment {
 
     String[] goalid = new String[num];
 
+    View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        final View view = inflater.inflate(R.layout.goalactivity, container, false);
+        view = inflater.inflate(R.layout.goalactivity, container, false);
         final Context context = getContext();
         /*SharedPreferences preferences = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
@@ -82,9 +81,6 @@ public class Goal extends Fragment {
         //((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         //Add a upbutton to allow the user to go back
         // ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //Initialize the DatabaseHelper
-        //helper = new myDbAdapter(getActivity().getApplicationContext());
 
         //Initialize the FirebaseDatabase
         databaseRefGoal = FirebaseDatabase.getInstance().getReference("goal");
@@ -104,8 +100,6 @@ public class Goal extends Fragment {
         //Creates the ListView
         listView = (ListView) view.findViewById(R.id.listv);
 
-        //User's input for adding the Goals
-       // input = (EditText) view.findViewById(R.id.editText);
 
         //Create an ArrayList object to store the goals that has been click on the list view
         selectedItems = new ArrayList<String>();
@@ -171,13 +165,10 @@ public class Goal extends Fragment {
 
                 alertDialog.setView(inputGoal);
 
-                //When pressed Add, it will add the Goal to the firebase database and listview
+                //When you press the add icon set goal, it will add the Goal to the firebase database and listview
                 alertDialog.setPositiveButton("Add",
                         new DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog, int which){
-                                //String weight = inputWeight.getText().toString();
-                                //UserWeight userWeight = new UserWeight(weight);
-
                                 String goal = inputGoal.getText().toString();
                                 if(!TextUtils.isEmpty(goal))
                                 {
@@ -223,7 +214,7 @@ public class Goal extends Fragment {
                 arrayList.add(goal.getgoal());
                 goalidlist.add(goal.getgoalID());
             }
-            adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+            adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, arrayList);
             listView.setAdapter(adapter);
         }
 

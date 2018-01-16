@@ -21,41 +21,42 @@
             android:background="@mipmap/addgoalicon"
             tools:layout_constraintRight_creator="1"
             tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toTopOf="@+id/goallist"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/listv"
+            android:layout_marginStart="226dp"
+            android:layout_marginEnd="237dp"
+            app:layout_constraintRight_toRightOf="@+id/listv"
             tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="0dp"
+            android:layout_marginBottom="-10dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.501" />
+            app:layout_constraintHorizontal_bias="0.488" />
 
         <TextView
             android:id="@+id/goallist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="5dp"
             android:text="@string/listgoal"
             android:textColor="@android:color/background_light"
             android:textSize="24sp"
             tools:layout_constraintBottom_creator="1"
             app:layout_constraintBottom_toTopOf="@+id/listv"
             tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="26dp" />
+            android:layout_marginBottom="6dp"
+            app:layout_constraintLeft_toLeftOf="@+id/listv" />
 
         <ListView
             android:id="@+id/listv"
             android:layout_width="0dp"
-            android:layout_height="384dp"
+            android:layout_height="180dp"
             android:background="@android:color/white"
-            tools:layout_constraintTop_creator="1"
-            tools:layout_constraintRight_creator="1"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="160dp"
-            tools:layout_constraintLeft_creator="1"
+            android:layout_marginBottom="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.0">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_constraintRight_creator="1"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            tools:layout_constraintLeft_creator="1">
 
         </ListView>
 
