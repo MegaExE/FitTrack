@@ -66,16 +66,7 @@ public class Challenges extends Fragment {
         final SharedPreferences.Editor editor =sharedPreferences.edit();
 
         super.onCreate(savedInstanceState);
-        //getActivity().setContentView(R.layout.challenges);
-        //Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        //Add the menu bar into the ActionBar
-        //((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        //Add a upbutton to allow the user to go back
-        // ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        //Initialize the DatabaseHelper
-        //helper = new myDbAdapter(getActivity().getApplicationContext());
         //Initialize the firebase database
         databaseRefChallenges = FirebaseDatabase.getInstance().getReference("challenges");
 
@@ -96,29 +87,6 @@ public class Challenges extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
-
-
-        //Gets the user's goals from the database
-        //String data = helper.getData_Challenges();
-       // String[] test = data.split("\n");
-        //Displays challenges
-       // for(String challenges : test) {
-        //    arrayList.add(challenges);
-       // }
-
-        //supply data items to Checkbox ListView
-        //ArrayAdapter<String> aa=new ArrayAdapter<String>(this,R.layout.checkablelist,R.id.txt_title,items);
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
-
-       /// chl.setAdapter(adapter);
         chl.setItemChecked(0,true);
 
        // Toast.makeText((getActivity().getApplicationContext()), Integer.toString(chl.getCount()), Toast.LENGTH_LONG).show();
@@ -159,10 +127,7 @@ public class Challenges extends Fragment {
 
                     editor.commit();
 
-
                     //selectedItem.setChecked();
-
-
                 }
 
             }
@@ -174,7 +139,7 @@ public class Challenges extends Fragment {
 
     }
 
-
+    //Updated the listview and Display the challenges/task from the firebase database
     @Override
     public void onStart() {
         super.onStart();
@@ -183,13 +148,13 @@ public class Challenges extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 arrayList.clear();
-                //goalidlist.clear();
-                //Retrieve the User's goal and goal id and display it on List of goals
+                //Retrieve the challenges and  display it on List of challenges
                 for (DataSnapshot goalsnapshot : dataSnapshot.getChildren()) {
                     challengeslist challenges = goalsnapshot.getValue(challengeslist.class);
                     arrayList.add(challenges.getchallenge());
                    // goalidlist.add(goal.getgoalID());
                 }
+                //Adds checkbox to the listview
                 adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
                 chl.setAdapter(adapter);
             }
@@ -201,32 +166,4 @@ public class Challenges extends Fragment {
         });
 
     }
-
-/*
-    public void onStart(){
-        super.onStart();
-
-    }
-
-    public void showSelectedItems(View view){
-        String selItems="";
-        for(String item:selectedItems){
-            if(selItems=="")
-                selItems=item;
-            else
-                selItems+="/"+item;
-        }
-        Toast.makeText((getActivity().getApplicationContext()), selItems, Toast.LENGTH_LONG).show();
-    }
-
-    public void viewdata(View view)
-    {
-        String data = helper.getData_Challenges();
-        Message.message((getActivity().getApplicationContext()),data);
-    }
-*/
-
-
-
-
 }
