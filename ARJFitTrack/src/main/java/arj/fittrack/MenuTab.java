@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 /**
  *  Team Name: ARJ
  *  Adrian Caprini N01115682, Raphael Najera N01104031, Johnson Liang N01129137
@@ -101,9 +100,6 @@ public class MenuTab extends AppCompatActivity {
                                 // if this button is clicked, just close
                                 // the dialog box and do nothing
                                 dialog.cancel();
-                                //display in short period of time
-                                Toast.makeText(getApplicationContext(), "Ok is clicked",
-                                        Toast.LENGTH_LONG).show();
                             }
                         });
                 // create alert dialog

@@ -15,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import static arj.fittrack.R.id.count;
 /**
@@ -164,9 +163,6 @@ public class Main extends AppCompatActivity implements SensorEventListener {
                                 // if this button is clicked, just close
                                 // the dialog box and do nothing
                                 dialog.cancel();
-                                //display in short period of time
-                                Toast.makeText(getApplicationContext(), "Ok is clicked",
-                                        Toast.LENGTH_LONG).show();
                             }
                         });
                 // create alert dialog

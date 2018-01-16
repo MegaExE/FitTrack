@@ -5,9 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-//import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,16 +18,18 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.text.InputType;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+
+//import android.os.Message;
 
 /**
  *  Team Name: ARJ
@@ -196,8 +198,6 @@ public class WeightLog extends AppCompatActivity {
                                 // the dialog box and do nothing
                                 dialog.cancel();
                                 //display in short period of time
-                                Toast.makeText(getApplicationContext(), "Ok is clicked",
-                                        Toast.LENGTH_LONG).show();
                             }
                         });
                 // create alert dialog
