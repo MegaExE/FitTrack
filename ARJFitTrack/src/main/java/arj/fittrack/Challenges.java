@@ -37,15 +37,15 @@ public class Challenges extends Fragment {
     static ArrayList<String> arrayList;
     static ArrayAdapter<String> adapter;
 
-
+    //Declare ListView
     ListView chl;
-
-    //Declare Database
-    myDbAdapter helper;
 
     //Firebase
     DatabaseReference databaseRefChallenges;
 
+    //Declare SharedPreferences
+    SharedPreferences sharedPreferences = null;
+    SharedPreferences.Editor editor;
 
 
     @Nullable
@@ -61,9 +61,10 @@ public class Challenges extends Fragment {
             getActivity().setTheme(R.style.AppTheme_Dark_NoActionBar);
         }*/
 
-        final SharedPreferences sharedPreferences = PreferenceManager
+        //SharedPreference to remember the challenges/task that the user checked
+      sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getActivity());
-        final SharedPreferences.Editor editor =sharedPreferences.edit();
+       editor =sharedPreferences.edit();
 
         super.onCreate(savedInstanceState);
 
@@ -81,62 +82,28 @@ public class Challenges extends Fragment {
         //Set multiple selection mode
         chl.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
-
         //create an ArrayList object to store selected items
         selectedItems = new ArrayList<String>();
-
-
-
-        chl.setItemChecked(0,true);
-
-       // Toast.makeText((getActivity().getApplicationContext()), Integer.toString(chl.getCount()), Toast.LENGTH_LONG).show();
-
-
-        /*for(int i = 0; i < chl.getCount(); i++){
-            chl.setItemChecked(i,sharedPreferences.getBoolean(Integer.toString(i),false));
-            if(sharedPreferences.getBoolean(Integer.toString(i),false)){
-                chl.setItemChecked(i,true);
-            }
-            else{
-                chl.setItemChecked(i,false);
-            }
-        }*/
-
-
-       // chl.setChe
 
         //set OnItemClickListener
         chl.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // selected item
-                //TextView textview=((LinearLayout)view).findViewById(R.id.txt_title);
 
                 String selectedItem = ((TextView) view).getText().toString();
                 if (selectedItems.contains(selectedItem)){
-                    selectedItems.remove(selectedItem); //remove deselected item from the list of selected items
-                //editor.putBoolean(Integer.toString(position), false);
-
+                    //save the position that have been unchecked to false to SharedPreferences
+                editor.putBoolean(Integer.toString(position), false);
                 editor.commit();
             }
                 else {
-                    selectedItems.add(selectedItem); //add selected item to the list of selected items
-
-
-                    chl.setItemChecked(position,true);
-                   // editor.putBoolean(Integer.toString(position),true);
-
+                    //save the position that have been checked to true to SharedPreferences
+                    editor.putBoolean(Integer.toString(position),true);
                     editor.commit();
-
-                    //selectedItem.setChecked();
                 }
-
             }
 
         });
-
-
         return view;
-
     }
 
     //Updated the listview and Display the challenges/task from the firebase database
@@ -157,6 +124,19 @@ public class Challenges extends Fragment {
                 //Adds checkbox to the listview
                 adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
                 chl.setAdapter(adapter);
+                chl.setItemChecked(0,true);
+
+                //Load the sharedPreferences to remember the challenges/task that the user checked to show that the user's compleleted the challenges/tasks
+                for(int i = 0; i < chl.getCount(); i++){
+                    chl.setItemChecked(i,sharedPreferences.getBoolean(Integer.toString(i),false));
+                    if(sharedPreferences.getBoolean(Integer.toString(i),false)){
+                        chl.setItemChecked(i,true);
+                    }
+                    else{
+                        chl.setItemChecked(i,false);
+                    }
+                }
+
             }
 
             @Override
