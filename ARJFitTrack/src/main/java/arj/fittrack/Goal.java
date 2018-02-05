@@ -45,6 +45,7 @@ public class Goal extends Fragment {
     //create an ArrayList object to store selected items
     ArrayList<String> selectedItems;
 
+    //Declare ListView
     ListView listView;
 
     //Declare Database
@@ -56,10 +57,11 @@ public class Goal extends Fragment {
     // Declare Firebase
     DatabaseReference databaseRefGoal;
 
-    int num = 0;
 
-    String[] goalid = new String[num];
+    //int num = 0;
+    //String[] goalid = new String[num];
 
+    //Declare view
     View view;
 
     @Nullable

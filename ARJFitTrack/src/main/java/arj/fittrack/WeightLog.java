@@ -284,7 +284,7 @@ public class WeightLog extends AppCompatActivity {
                     showWeight.setText(weight + " LB");
                 }
                 //Displays the data of into a ListView
-                adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+                adapter = new ArrayAdapter<String>(WeightLog.this, android.R.layout.simple_list_item_1, arrayList);
                 listView.setAdapter(adapter);
             }
 

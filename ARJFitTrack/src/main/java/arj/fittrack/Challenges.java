@@ -47,12 +47,15 @@ public class Challenges extends Fragment {
     SharedPreferences sharedPreferences = null;
     SharedPreferences.Editor editor;
 
+    //Declare view
+    View view;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        final View view = inflater.inflate(R.layout.challenges, container, false);
+        view = inflater.inflate(R.layout.challenges, container, false);
 
         /*SharedPreferences preferences = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
@@ -122,7 +125,7 @@ public class Challenges extends Fragment {
                    // goalidlist.add(goal.getgoalID());
                 }
                 //Adds checkbox to the listview
-                adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
+                adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
                 chl.setAdapter(adapter);
                // chl.setItemChecked(0,true);
 
