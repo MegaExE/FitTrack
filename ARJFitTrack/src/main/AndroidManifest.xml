@@ -5,6 +5,14 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-feature
+        android:name="android.hardware.sensor.stepcounter"
+        android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.sensor.stepdetector"
+        android:required="false"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/fittrackicon"
@@ -38,12 +46,7 @@
 
         </activity>
 
-        <uses-feature
-            android:name="@string/step_counter"
-            android:required="false"/>
-        <uses-feature
-            android:name="@string/step_detector"
-            android:required="false"/>
+
 
         <activity
             android:name=".MenuTab"
